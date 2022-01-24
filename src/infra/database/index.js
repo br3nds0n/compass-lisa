@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const config = require('./config.js')
+require('dotenv').config()
 
 class Database {
   constructor () {
@@ -7,7 +7,7 @@ class Database {
   }
 
   connect () {
-    return mongoose.connect(config)
+    return mongoose.connect(process.env.DB_HOST)
   }
 }
 
