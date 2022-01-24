@@ -1,7 +1,7 @@
 const express = require('express')
 
 const routes = require('./routes')
-const Database = require('./database')
+const Database = require('./infra/database')
 
 class App {
   static async init (env) {
