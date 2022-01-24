@@ -1,0 +1,39 @@
+{
+  "name": "compass-lisa",
+  "version": "1.0.0",
+  "description": "🚗api: for renting cars",
+  "main": "./src/server.js",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "dev": "nodemon ./src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/br3nds0n/compass-lisa.git"
+  },
+  "keywords": [],
+  "author":  {
+    "name": "Brendson Victor",
+    "email": "brendson.campos_bols@compasso.com.br",
+    "url": "https://github.com/br3nds0n"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/br3nds0n/compass-lisa/issues"
+  },
+  "homepage": "https://github.com/br3nds0n/compass-lisa#readme",
+  "dependencies": {
+    "dotenv": "^14.2.0",
+    "express": "^4.17.2",
+    "joi": "^17.5.0",
+    "mongoose": "^6.1.7"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "nodemon": "^2.0.15"
+  }
+}
