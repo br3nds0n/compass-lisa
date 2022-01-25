@@ -1,5 +1,9 @@
 const schema = require('../schema/carSchema')
 
-class CarRepository {}
+class CarRepository {
+  async create (car) {
+    return schema.create(car)
+  }
+}
 
-module.exports = CarRepository()
+module.exports = new CarRepository()

@@ -24,6 +24,12 @@ const schema = new Schema({
   }
 })
 
+schema.method('toJSON', function () {
+  const { __v, ...car } = this.toObject()
+
+  return car
+})
+
 const Car = mongoose.model('Veiculos', schema)
 
 module.exports = Car
