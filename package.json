@@ -12,7 +12,7 @@
     "url": "git+https://github.com/br3nds0n/compass-lisa.git"
   },
   "keywords": [],
-  "author":  {
+  "author": {
     "name": "Brendson Victor",
     "email": "brendson.campos_bols@compasso.com.br",
     "url": "https://github.com/br3nds0n"
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/br3nds0n/compass-lisa#readme",
   "dependencies": {
+    "@joi/date": "^2.1.0",
     "dotenv": "^14.2.0",
     "express": "^4.17.2",
     "joi": "^17.5.0",
