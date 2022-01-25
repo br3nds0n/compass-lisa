@@ -3,6 +3,10 @@ const Joi = require('joi').extend(require('@joi/date'))
 module.exports = async (req, res, next) => {
   try {
     const schema = Joi.object({
+      id: Joi.string()
+        .min(24)
+        .max(24),
+
       modelo: Joi.string(),
 
       cor: Joi.string(),
