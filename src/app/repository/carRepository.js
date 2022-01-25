@@ -32,6 +32,16 @@ class CarRepository {
       })
     })
   }
+
+  async findById (id) {
+    return schema.findOne({
+      _id: id
+    })
+  }
+
+  async delete (id) {
+    return schema.deleteOne(id)
+  }
 }
 
 module.exports = new CarRepository()
