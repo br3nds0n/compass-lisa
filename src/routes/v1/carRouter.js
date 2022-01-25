@@ -8,5 +8,6 @@ router
   .post('/car', validationCreate, CarController.create)
   .get('/car', validationFind, CarController.findAll)
   .delete('/car/:id', CarController.delete)
+  .put('/car/:id', CarController.update)
 
 module.exports = router

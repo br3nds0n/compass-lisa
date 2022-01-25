@@ -42,6 +42,10 @@ class CarRepository {
   async delete (id) {
     return schema.deleteOne(id)
   }
+
+  async update (up) {
+    return schema.updateOne(up)
+  }
 }
 
 module.exports = new CarRepository()

@@ -32,6 +32,20 @@ class CarService {
 
     return result
   }
+
+  async update (id, up) {
+    const result = await this.findById(id)
+    const updateId = ['modelo', 'cor', 'acessorios', 'quantidadePassageiros']
+
+    updateId.forEach(key => {
+      if (up[key] !== undefined) {
+        result[key] = up[key]
+      }
+    })
+
+    await CarRepository.update(result)
+    return result
+  }
 }
 
 module.exports = new CarService()
