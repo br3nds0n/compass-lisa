@@ -28,6 +28,16 @@ class CarController {
       return res.status(500).json({ error })
     }
   }
+
+  async delete (req, res) {
+    const { id } = req.params
+    try {
+      const result = CarService.delete(id)
+      return res.status(204).json(result)
+    } catch (error) {
+      return res.status(500).json({ error })
+    }
+  }
 }
 
 module.exports = new CarController()

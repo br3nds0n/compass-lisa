@@ -7,5 +7,6 @@ const validationQuery = require('../../app/validation/car/query/findAll')
 router
   .post('/car', validationCreate, CarController.create)
   .get('/car', validationQuery, CarController.findAll)
+  .delete('/car/:id', CarController.delete)
 
 module.exports = router

@@ -19,6 +19,19 @@ class CarService {
     })
     return result
   }
+
+  async findById (id) {
+    const result = await CarRepository.findById(id)
+
+    return result
+  }
+
+  async delete (id) {
+    const result = await this.findById(id)
+    await CarRepository.delete(result)
+
+    return result
+  }
 }
 
 module.exports = new CarService()
