@@ -1,5 +1,10 @@
 const CarRepository = require('../repository/carRepository')
 
-class CarService {}
+class CarService {
+  async create (car) {
+    const result = await CarRepository.create(car)
+    return result
+  }
+}
 
 module.exports = new CarService()
