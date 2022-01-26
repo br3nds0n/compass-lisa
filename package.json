@@ -24,6 +24,7 @@
   "homepage": "https://github.com/br3nds0n/compass-lisa#readme",
   "dependencies": {
     "@joi/date": "^2.1.0",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^14.2.0",
     "express": "^4.17.2",
     "joi": "^17.5.0",
