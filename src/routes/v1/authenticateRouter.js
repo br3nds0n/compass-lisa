@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const AuthenticateController = require('../../app/validation/authentication/authenticateController')
+const AuthenticateController = require('../../app/controller/authentication/authenticateController')
 router
   .post('/authenticate', AuthenticateController.authenticate)
 
