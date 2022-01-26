@@ -32,8 +32,19 @@ class CarController {
   async delete (req, res) {
     const { id } = req.params
     try {
-      const result = CarService.delete(id)
+      const result = await CarService.delete(id)
       return res.status(204).json(result)
+    } catch (error) {
+      return res.status(500).json({ error })
+    }
+  }
+
+  async update (req, res) {
+    const { id } = req.params
+    const newCar = req.body
+    try {
+      const result = await CarService.update(id, newCar)
+      return res.status(200).json(result)
     } catch (error) {
       return res.status(500).json({ error })
     }
