@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
+const bcrypt = require('bcryptjs')
 
 const schema = new Schema({
   nome: {
@@ -17,17 +18,26 @@ const schema = new Schema({
   },
   email: {
     type: String,
+    unique: true,
     required: true
   },
   senha: {
     type: String,
-    required: true
+    required: true,
+    select: false
   },
   habilitado: {
     type: String,
     enum: ['sim', 'não'],
     required: true
   }
+})
+
+schema.pre('save', async function (next) {
+  const hash = await bcrypt.hash(this.senha, 10)
+  this.senha = hash
+
+  next()
 })
 
 schema.method('toJSON', function () {
