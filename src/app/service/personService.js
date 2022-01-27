@@ -21,10 +21,30 @@ class PersonService {
     return result
   }
 
+  async findById (id) {
+    const result = await PersonRepository.findById(id)
+
+    return result
+  }
+
   async delete (id) {
     const result = await this.findById(id)
     await PersonRepository.delete(result)
 
+    return result
+  }
+
+  async update (id, up) {
+    const result = await this.findById(id)
+    const updateId = ['nome', 'cpf', 'data_nascimento', 'email', 'habilitado']
+
+    updateId.forEach(key => {
+      if (up[key] !== undefined) {
+        result[key] = up[key]
+      }
+    })
+
+    await PersonRepository.update(result)
     return result
   }
 }
