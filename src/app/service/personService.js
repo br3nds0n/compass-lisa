@@ -20,6 +20,13 @@ class PersonService {
     })
     return result
   }
+
+  async delete (id) {
+    const result = await this.findById(id)
+    await PersonRepository.delete(result)
+
+    return result
+  }
 }
 
 module.exports = new PersonService()
