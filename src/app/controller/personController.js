@@ -15,13 +15,14 @@ class PersonController {
     try {
       const result = await PersonService.findAll({
         _id: payload.id,
-        modelo: payload.modelo,
-        cor: payload.cor,
-        ano: payload.ano,
-        acessorios: payload.acessorios,
-        quantidadePassageiros: payload.quantidadePassageiros,
-        limit: payload.limit,
-        skip: payload.skip
+        nome: payload.nome,
+        cpf: payload.cpf,
+        data_nascimento: payload.data_nascimento,
+        email: payload.email,
+        senha: payload.senha,
+        habilitado: payload.habilitado,
+        limit: (payload.limit) ? Number(payload.limit) : 100,
+        skip: (payload.skip) ? Number(payload.skip) : undefined
       })
       return res.status(200).json(result)
     } catch (error) {
@@ -44,6 +45,16 @@ class PersonController {
     const newPerson = req.body
     try {
       const result = await PersonService.update(id, newPerson)
+      return res.status(200).json(result)
+    } catch (error) {
+      return res.status(500).json({ error })
+    }
+  }
+
+  async getById (req, res) {
+    const { id } = req.params
+    try {
+      const result = await PersonService.findById(id)
       return res.status(200).json(result)
     } catch (error) {
       return res.status(500).json({ error })
