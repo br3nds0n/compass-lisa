@@ -18,9 +18,10 @@ module.exports = async (req, res, next) => {
 
       acessorios: Joi.array()
         .items(
-          Joi.object()
-            .required())
-        .unique(),
+          Joi.object({
+            descricao: Joi.string()
+              .required()
+          })),
 
       quantidadePassageiros: Joi.number()
         .integer(),
