@@ -16,10 +16,12 @@ module.exports = async (req, res, next) => {
         .required(),
 
       acessorios: Joi.array()
+        .min(1)
         .items(
-          Joi.object()
-            .required())
-        .unique()
+          Joi.object({
+            descricao: Joi.string()
+              .required()
+          }))
         .required(),
 
       quantidadePassageiros: Joi.number()
