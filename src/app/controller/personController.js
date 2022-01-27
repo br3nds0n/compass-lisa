@@ -38,6 +38,17 @@ class PersonController {
       return res.status(500).json({ error })
     }
   }
+
+  async update (req, res) {
+    const { id } = req.params
+    const newPerson = req.body
+    try {
+      const result = await PersonService.update(id, newPerson)
+      return res.status(200).json(result)
+    } catch (error) {
+      return res.status(500).json({ error })
+    }
+  }
 }
 
 module.exports = new PersonController()
