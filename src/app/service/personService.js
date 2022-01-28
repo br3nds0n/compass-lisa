@@ -1,9 +1,23 @@
 const PersonRepository = require('../repository/personRepository')
 
+const EntityNotFound = require('../error/errors/EntityNotFound')
+const UniqueEntryError = require('../error/errors/UniqueEntryError')
+
 class PersonService {
   async create (person) {
-    const result = await PersonRepository.create(person)
-    return result
+    try {
+      const result = await PersonRepository.create(person)
+      return result
+    } catch (error) {
+      if (error.name === 'ServerError' && error.code === 11000) {
+        throw new UniqueEntryError(
+          'Clientes',
+          Object.keys(error.keyPattern).map(key => key)
+        )
+      } else {
+        throw error
+      }
+    }
   }
 
   async findAll (payload) {
@@ -24,6 +38,9 @@ class PersonService {
   async findById (id) {
     const result = await PersonRepository.findById(id)
 
+    if (result === null) {
+      throw new EntityNotFound(`Cannot find customer with ID = '${id}'`)
+    }
     return result
   }
 
