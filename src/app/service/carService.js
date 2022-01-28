@@ -1,9 +1,23 @@
 const CarRepository = require('../repository/carRepository')
 
+const EntityNotFound = require('../error/errors/EntityNotFound')
+const UniqueEntryError = require('../error/errors/UniqueEntryError')
+
 class CarService {
   async create (car) {
-    const result = await CarRepository.create(car)
-    return result
+    try {
+      const result = await CarRepository.create(car)
+      return result
+    } catch (error) {
+      if (error.name === 'ServerError' && error.code === 11000) {
+        throw new UniqueEntryError(
+          'Veiculos',
+          Object.keys(error.keyPattern).map(key => key)
+        )
+      } else {
+        throw error
+      }
+    }
   }
 
   async findAll (payload) {
@@ -23,6 +37,9 @@ class CarService {
   async findById (id) {
     const result = await CarRepository.findById(id)
 
+    if (result === null) {
+      throw new EntityNotFound(`Cannot find vehicle with ID = '${id}'`)
+    }
     return result
   }
 
