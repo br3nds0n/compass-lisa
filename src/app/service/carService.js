@@ -21,16 +21,7 @@ class CarService {
   }
 
   async findAll (payload) {
-    const result = await CarRepository.findAll({
-      _id: payload.id,
-      modelo: payload.modelo,
-      cor: payload.cor,
-      ano: payload.ano,
-      acessorios: payload.acessorios,
-      quantidadePassageiros: payload.quantidadePassageiros,
-      limit: (payload.limit) ? Number(payload.limit) : 100,
-      skip: (payload.skip) ? Number(payload.skip) : undefined
-    })
+    const result = await CarRepository.findAll(payload)
     return result
   }
 
@@ -44,23 +35,21 @@ class CarService {
   }
 
   async delete (id) {
-    const result = await this.findById(id)
-    await CarRepository.delete(result)
+    const result = await CarRepository.delete(id)
 
     return result
   }
 
-  async update (id, up) {
-    const result = await this.findById(id)
+  async update (id, payload) {
+    const result = await CarRepository.findById(id)
     const updateId = ['modelo', 'cor', 'acessorios', 'quantidadePassageiros']
 
     updateId.forEach(key => {
-      if (up[key] !== undefined) {
-        result[key] = up[key]
+      if (payload[key] !== undefined) {
+        result[key] = payload[key]
       }
     })
 
-    await CarRepository.update(result)
     return result
   }
 }

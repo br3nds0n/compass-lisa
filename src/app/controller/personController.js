@@ -20,17 +20,7 @@ class PersonController {
   async findAll (req, res, next) {
     const payload = req.query
     try {
-      const result = await PersonService.findAll({
-        _id: payload.id,
-        nome: payload.nome,
-        cpf: payload.cpf,
-        data_nascimento: payload.data_nascimento,
-        email: payload.email,
-        senha: payload.senha,
-        habilitado: payload.habilitado,
-        limit: (payload.limit) ? Number(payload.limit) : 100,
-        skip: (payload.skip) ? Number(payload.skip) : undefined
-      })
+      const result = await PersonService.findAll(payload)
       return res.status(200).json(result)
     } catch (error) {
       next(error)
@@ -40,8 +30,8 @@ class PersonController {
   async delete (req, res, next) {
     const { id } = req.params
     try {
-      const result = await PersonService.delete(id)
-      return res.status(204).json(result)
+      await PersonService.delete(id)
+      return res.status(204).end()
     } catch (error) {
       if (error instanceof EntityNotFound) {
         next(new NotFound(error.message))

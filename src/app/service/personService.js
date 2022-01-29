@@ -21,17 +21,8 @@ class PersonService {
   }
 
   async findAll (payload) {
-    const result = await PersonRepository.findAll({
-      _id: payload.id,
-      nome: payload.nome,
-      cpf: payload.cpf,
-      data_nascimento: payload.data_nascimento,
-      email: payload.email,
-      senha: payload.senha,
-      habilitado: payload.habilitado,
-      limit: (payload.limit) ? Number(payload.limit) : 100,
-      skip: (payload.skip) ? Number(payload.skip) : undefined
-    })
+    const result = await PersonRepository.findAll(payload)
+
     return result
   }
 
@@ -45,23 +36,21 @@ class PersonService {
   }
 
   async delete (id) {
-    const result = await this.findById(id)
-    await PersonRepository.delete(result)
+    const result = await PersonRepository.delete(id)
 
     return result
   }
 
-  async update (id, up) {
-    const result = await this.findById(id)
+  async update (id, payload) {
+    const result = await PersonRepository.update(id)
     const updateId = ['nome', 'cpf', 'data_nascimento', 'email', 'habilitado']
 
     updateId.forEach(key => {
-      if (up[key] !== undefined) {
-        result[key] = up[key]
+      if (payload[key] !== undefined) {
+        result[key] = payload[key]
       }
     })
 
-    await PersonRepository.update(result)
     return result
   }
 }
