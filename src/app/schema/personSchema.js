@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
-const { Schema } = mongoose
+const mongoosePaginate = require('mongoose-paginate-v2')
 const bcrypt = require('bcryptjs')
+
+const { Schema } = mongoose
 
 const schema = new Schema({
   nome: {
@@ -48,6 +50,7 @@ schema.method('toJSON', function () {
   return person
 })
 
+schema.plugin(mongoosePaginate)
 const Person = mongoose.model('Clientes', schema)
 
 module.exports = Person

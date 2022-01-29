@@ -1,36 +1,29 @@
 const schema = require('../schema/carSchema')
-const clearObject = require('../helper/clearObject')
 
 class CarRepository {
   async create (car) {
     return schema.create(car)
   }
 
-  async findAll ({ limit = 0, skip = 0, ...payload }) {
-    clearObject(payload)
-
-    const filter = {
-      $and: [{ ...payload }
-      ]
+  async findAll (payload) {
+    const myCustomLabels = {
+      totalDocs: 'total',
+      docs: 'Veiculos',
+      page: 'offset',
+      nextPage: false,
+      prevPage: false,
+      totalPages: 'offsets',
+      pagingCounter: false,
+      meta: false,
+      hasPrevPage: false,
+      hasNextPage: false
     }
-
-    const count = await schema.count(filter)
-      .exec()
-
-    const car = await schema.find(filter)
-      .limit(limit)
-      .skip((skip === 0) ? skip : skip + 1)
-      .exec()
-
-    return new Promise((resolve, reject) => {
-      resolve({
-        veiculos: car,
-        total: count,
-        limit: (limit === 0) ? count : limit,
-        offset: skip + 1,
-        offsets: (limit === 0) ? 1 : Math.ceil(count / limit)
-      })
-    })
+    const options = {
+      page: 1,
+      limit: 100,
+      customLabels: myCustomLabels
+    }
+    return schema.paginate(payload, options, {})
   }
 
   async findById (id) {
@@ -40,11 +33,15 @@ class CarRepository {
   }
 
   async delete (id) {
-    return schema.deleteOne(id)
+    return schema.deleteOne({
+      _id: id
+    })
   }
 
-  async update (up) {
-    return schema.updateOne(up)
+  async update (id, payload) {
+    return schema.findOneAndUpdate({
+      _id: id
+    }, payload)
   }
 }
 
