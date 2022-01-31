@@ -28,21 +28,15 @@ class PersonRepository {
   }
 
   async findById (id) {
-    return schema.findOne({
-      _id: id
-    })
+    return schema.findById(id)
   }
 
   async delete (id) {
-    return schema.deleteOne({
-      _id: id
-    })
+    return schema.findByIdAndDelete(id)
   }
 
   async update (id, payload) {
-    return schema.findOneAndUpdate({
-      _id: id
-    }, payload)
+    return schema.findByIdAndUpdate(id, payload, { new: true })
   }
 }
 

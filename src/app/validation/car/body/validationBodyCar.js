@@ -5,9 +5,11 @@ module.exports = async (req, res, next) => {
   try {
     const schema = Joi.object({
       modelo: Joi.string()
+        .trim()
         .required(),
 
       cor: Joi.string()
+        .trim()
         .required(),
 
       ano: Joi.date()
@@ -21,6 +23,7 @@ module.exports = async (req, res, next) => {
         .items(
           Joi.object({
             descricao: Joi.string()
+              .trim()
               .required()
           }))
         .required(),
@@ -30,7 +33,10 @@ module.exports = async (req, res, next) => {
         .required()
     })
 
-    const { error } = await schema.validate(req.body, { abortEarl: true })
+    const { error } = await schema.validate(req.body, {
+      abortEarly: false,
+      allowUnknown: false
+    })
 
     if (error) {
       throw new BadRequest({ details: error.details.map(err => err.message) })

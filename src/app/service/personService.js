@@ -42,15 +42,7 @@ class PersonService {
   }
 
   async update (id, payload) {
-    const result = await PersonRepository.update(id)
-    const updateId = ['nome', 'cpf', 'data_nascimento', 'email', 'habilitado']
-
-    updateId.forEach(key => {
-      if (payload[key] !== undefined) {
-        result[key] = payload[key]
-      }
-    })
-
+    const result = await PersonRepository.update(id, payload)
     return result
   }
 }
