@@ -105,7 +105,7 @@ $ npm install
 #
 
 ### ⚙ Configurar as variáveis de ambiente
-> Será necessário criar na raiz do projeto um arquivo `.env` configurar as variáveis. Exemplo [.env](./envExemplo):
+> Será necessário criar na raiz do projeto um arquivo `.env` configurar as variáveis. Exemplo:
 
 ```bash
 # Porta que o servidor irá rodar.
