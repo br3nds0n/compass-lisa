@@ -30,8 +30,8 @@ class CarController {
   async delete (req, res, next) {
     const { id } = req.params
     try {
-      const result = await CarService.delete(id)
-      return res.status(204).json(result)
+      await CarService.delete(id)
+      return res.status(204).end()
     } catch (error) {
       if (error instanceof EntityNotFound) {
         next(new NotFound(error.message))
