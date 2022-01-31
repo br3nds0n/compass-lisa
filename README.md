@@ -17,7 +17,7 @@ Vamos ao projeto! `#dreamBigger🚀💛`
  ## <img height="18" width="18" src="https://user-images.githubusercontent.com/82064724/151113975-e8ff6813-b253-4670-b626-80e842363ab2.png">Indice
 <!--ts-->
    * [🧠 Contexto](#-Contexto)
-     * [Rotas](#-rotas)
+     * [Rotas](#-car)
    * [📥 Baixar e executar o projeto](#-Baixar-e-executar-o-projeto)
      * [Setup da aplicação](#-setup-da-aplicação)
      * [Iniciando a aplicação](#-iniciando-a-aplicação)
@@ -25,6 +25,7 @@ Vamos ao projeto! `#dreamBigger🚀💛`
    * [🏆 Agradecimentos](#-Agradecimentos)
    * [✍🏼 Autor](#-Autor)
    * [📝 Licença](#-licença)
+   * [🎁 Bonus](#-Bonus)
 <!--te-->
 
  ---
@@ -53,7 +54,7 @@ Nesta parte 01 do [desafio](https://github.com/br3nds0n/reademefinal/files/79392
 
 #
 
-### 👤 Peole
+### 👤 People
 > Rota: `http://localhost:<PORT>/api/v1/people`
 
 | Id             | Request           | Endpoint                 |
@@ -240,3 +241,8 @@ Esse repositório está licenciado pela **MIT LICENSE**. Para mais informações
  
  <br>
 
+## 🎁 Bonus
+
+ #### [Felipe](https://www.linkedin.com/in/felps03/), [Bruna](https://www.linkedin.com/in/brunasantos14/) e [Giovanni](https://www.linkedin.com/in/giovanni-hoffmann-rodrigues-9253266a/) depois desse projeto: 
+ 
+  <img width="900" height="300" src="https://pm1.narvii.com/6359/1ec89eddc009439df6ac56cd7890f1e08e680fb6_hq.jpg">
