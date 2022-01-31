@@ -1,0 +1,429 @@
+openapi: 3.0.1
+info:
+  title: compass_lisa
+  description: Api CompassoLisa Dealership.
+  version: 1.0.0
+externalDocs:
+  description: Documentation
+  url: https://github.com/br3nds0n/compass-lisa/
+servers:
+- url: http://localhost:3000/api/v1/
+  description: Routes
+paths: 
+
+  /car:
+    get:
+      summary: Returns all cars.
+      parameters:
+      - name: modelo
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: cor
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: ano
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: acessorios
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: quantidadePassageiros
+        in: query
+        schema:
+          type: number
+        required: false
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Veiculos:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        modelo:
+                          type: string
+                        cor:
+                          type: string
+                        ano: 
+                          type: string
+                        acessorios:
+                          type: string
+                        quantidadePassageiros: 
+                          type: number
+        404:
+          description: car not found
+          content:
+            application/json: 
+              example: "not found"
+    post: 
+      summary: Create a new car.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                modelo:
+                  type: string
+                cor:
+                  type: string
+                ano:
+                  type: string
+                acessorios:
+                    type: string
+                quantidadePassageiros: 
+                    type: number
+      responses: 
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  _id:
+                    type: string
+                  moddelo:
+                    type: string
+                  cor: 
+                    type: string
+                  ano:
+                    type: string
+                  acessorios:
+                    type: string
+                  quantidadePassageiros: 
+                    type: number
+
+
+        400:
+          description: Error
+          content:
+            application/json: 
+              example: "unable to register a new car"
+  /car/{id}:
+    put:
+      summary: Upgrade a car.
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                  _id:
+                    type: string
+                  moddelo:
+                    type: string
+                  cor: 
+                    type: string
+                  ano:
+                    type: string
+                  acessorios:
+                    type: string
+                  quantidadePassageiros: 
+                    type: number
+      responses: 
+        200:
+          description: successfully updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  moddelo:
+                    type: string
+                  cor: 
+                    type: string
+                  ano:
+                    type: string
+                  acessorios:
+                    type: string
+                  quantidadePassageiros: 
+                    type: number
+        404:
+          description: car not found
+          content:
+            application/json: 
+              example: "unable to update car"
+        400:
+          description: Body Error
+          content:
+            application/json:
+              example: "Body error"
+    delete:
+      summary: Delete a car.
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: string
+        required: true
+      responses: 
+        204:
+          description: successfully deleted
+        404:
+          description: car not found
+          content:
+            application/json: 
+              example: "could not erase the car"
+        400:
+          description: Body Error
+          content:
+            application/json:
+              example: "Body error"
+  /people:
+    post:
+      summary: Create a new Person.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                cpf:
+                  type: string
+                data_nascimento:
+                  type: string
+                email:
+                  type: string
+                senha:
+                  type: string
+                habilitado:
+                  type: string
+      responses: 
+        201:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  nome:
+                    type: string
+                  cpf:
+                    type: string
+                  data_nascimento:
+                    type: string
+                  email:
+                    type: string
+                  senha:
+                    type: string
+                  habilitado:
+                    type: string
+        400:
+          description: Error
+          content:
+            application/json: 
+              example: "it was not possible to register a new person"
+    get:
+      summary: Returns all People
+      parameters:
+      - name: nome
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: people_id
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: cpf
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: data_nascimento
+        in: query
+        schema:
+          type: number
+        required: false
+      - name: email
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: senha
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: habilitado
+        in: query
+        schema:
+          type: string
+        required: false
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Pessoas:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        nome:
+                          type: string
+                        people_id:
+                          type: string
+                        cpf: 
+                          type: string
+                        data_nascimento:
+                          type: number
+                        email:
+                          type: string
+                        senha:
+                          type: string
+                        habilitado:
+                          type: string
+        404:
+          description: person not found
+          content:
+            application/json: 
+              example: "not found"
+  /people/{id}:
+    put:
+      summary: Update a Person.
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                        nome:
+                          type: string
+                        people_id:
+                          type: string
+                        cpf: 
+                          type: string
+                        data_nascimento:
+                          type: number
+                        email:
+                          type: string
+                        senha:
+                          type: string
+                        habilitado:
+                          type: string
+      responses: 
+        200:
+          description: successfully updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                        nome:
+                          type: string
+                        people_id:
+                          type: string
+                        cpf: 
+                          type: string
+                        data_nascimento:
+                          type: number
+                        email:
+                          type: string
+                        senha:
+                          type: string
+                        habilitado:
+                          type: string
+        404:
+          description: person not found
+          content:
+            application/json: 
+              example: "could not update person"
+        400:
+          description: Body Error
+          content:
+            application/json:
+              example: "Body error"
+    delete:
+      summary: Delete a person.
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: string
+        required: true
+      responses: 
+        204:
+          description: successfully deleted
+        404:
+          description: person not found
+          content:
+            application/json: 
+              example: "could not delete person"
+        400:
+          description: Body Error
+          content:
+            application/json:
+              example: "Body error"
+  /authenticate:
+            post:
+              summary: Authentic a record
+              requestBody:
+                  content:
+                    application/json:
+                      schema:
+                        type: object
+                        properties:
+                          email:
+                            type: string
+                          senha:
+                            type: string
+              responses: 
+                  201:
+                    description: Success
+                    content:
+                      application/json:
+                        schema:
+                          type: object
+                          properties: 
+                            _id:
+                              type: string
+                            nome:
+                              type: string
+                            cpf: 
+                              type: string
+                            email:
+                              type: string
+                            habilitado:
+                              type: string
+                            token: 
+                              type: string
+                  404:
+                     description: registration not found
+                     content:
+                       application/json: 
+                          example: "registration not found"
