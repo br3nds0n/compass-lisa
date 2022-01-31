@@ -1,5 +1,5 @@
 const Joi = require('joi').extend(require('@joi/date'))
-const BadRequest = require('../../../error/errors/BadRequest')
+const BadRequest = require('../../error/errors/BadRequest')
 
 module.exports = async (req, res, next) => {
   try {
@@ -25,7 +25,8 @@ module.exports = async (req, res, next) => {
             descricao: Joi.string()
               .trim()
               .required()
-          }))
+          })
+        )
         .required(),
 
       quantidadePassageiros: Joi.number()
@@ -39,7 +40,7 @@ module.exports = async (req, res, next) => {
     })
 
     if (error) {
-      throw new BadRequest({ details: error.details.map(err => err.message) })
+      throw new BadRequest({ details: error.details.map((err) => err.message) })
     }
 
     next()

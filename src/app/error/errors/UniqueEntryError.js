@@ -3,7 +3,7 @@ class UniqueEntryError extends Error {
     super('Unique entry error')
 
     this.name = 'Unique Entry Error'
-    this.entrys = entrys.map(entry => `Data ${entity} already exists with same ${entry}`)
+    this.entrys = entrys.map((entry) => `Data ${entity} already exists with same ${entry}`)
   }
 }
 

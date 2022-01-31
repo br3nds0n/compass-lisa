@@ -1,4 +1,4 @@
-const PersonRepository = require('../repository/personRepository')
+const PersonRepository = require('../repository/PersonRepository')
 
 const EntityNotFound = require('../error/errors/EntityNotFound')
 const UniqueEntryError = require('../error/errors/UniqueEntryError')
@@ -12,7 +12,7 @@ class PersonService {
       if (error.name === 'ServerError' && error.code === 11000) {
         throw new UniqueEntryError(
           'Clientes',
-          Object.keys(error.keyPattern).map(key => key)
+          Object.keys(error.keyPattern).map((key) => key)
         )
       } else {
         throw error

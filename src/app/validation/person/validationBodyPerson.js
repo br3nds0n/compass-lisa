@@ -1,7 +1,10 @@
 const Joi = require('joi').extend(require('@joi/date'))
-const isCpf = require('../../../helper/isCpf')
 
-const BadRequest = require('../../../error/errors/BadRequest')
+const isCpf = require('../../helper/isCpf')
+const isYear18 = require('../../helper/isYear18')
+const ENUM = require('../../helper/enum')
+
+const BadRequest = require('../../error/errors/BadRequest')
 
 module.exports = async (req, res, next) => {
   try {
@@ -17,23 +20,38 @@ module.exports = async (req, res, next) => {
         .custom((value, help) => {
           if (isCpf(value)) {
             return help.message('Invalid cpf: enter a valid cpf')
-          } else {
-            return true
           }
+          return true
         }),
 
       data_nascimento: Joi.date()
         .format('DD/MM/YYYY')
-        .less('2004-01-01')
+        .raw()
         .max('now')
-        .required(),
+        .greater('1-1-1900')
+        .required()
+        .custom((value, help) => {
+          if (isYear18(new Date(value)) === false) {
+            return help.message('You need tobe ove 18 years old')
+          }
+        }).required(),
 
       email: Joi.string()
         .trim()
-        .email()
+        .email({
+          minDomainSegments: 2,
+          tlds: { allow: ENUM.email }
+        })
+        .required(),
+
+      senha: Joi.string()
+        .trim()
+        .min(6)
         .required(),
 
       habilitado: Joi.string()
+        .trim()
+        .valid(...Object.values(ENUM.habilitado))
         .required()
     })
 
@@ -43,7 +61,7 @@ module.exports = async (req, res, next) => {
     })
 
     if (error) {
-      throw new BadRequest({ details: error.details.map(err => err.message) })
+      throw new BadRequest({ details: error.details.map((err) => err.message) })
     }
 
     next()

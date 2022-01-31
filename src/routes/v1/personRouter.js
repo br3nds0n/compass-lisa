@@ -1,11 +1,11 @@
 const router = require('express').Router()
 
-const PersonController = require('../../app/controller/personController')
+const PersonController = require('../../app/controller/PersonController')
 
-const validationBodyPerson = require('../../app/validation/person/body/validationBodyPerson')
-const validationUpdate = require('../../app/validation/person/body/update')
+const validationBodyPerson = require('../../app/validation/person/validationBodyPerson')
+const validationUpdate = require('../../app/validation/person/update')
 const validationId = require('../../app/validation/validationId')
-const validationQuery = require('../../app/validation/person/query/findAll')
+const validationQuery = require('../../app/validation/person/findAll')
 
 router
   .post('/people', validationBodyPerson, PersonController.create)
