@@ -1,10 +1,10 @@
 const router = require('express').Router()
 
-const carController = require('../../app/controller/carController')
-const CarController = require('../../app/controller/carController')
+const carController = require('../../app/controller/CarController')
+const CarController = require('../../app/controller/CarController')
 
-const validationBodyCar = require('../../app/validation/car/body/validationBodyCar')
-const validationFind = require('../../app/validation/car/query/findAll')
+const validationBodyCar = require('../../app/validation/car/validationBodyCar')
+const validationFind = require('../../app/validation/car/findAll')
 const validationId = require('../../app/validation/validationId')
 
 router

@@ -1,5 +1,5 @@
-const schema = require('../../schema/personSchema')
 const bcrypt = require('bcryptjs')
+const schema = require('../../schema/personSchema')
 
 const generateToken = require('../../helper/generateToken')
 

@@ -1,4 +1,4 @@
-const CarService = require('../service/carService')
+const CarService = require('../service/CarService')
 
 const BadRequest = require('../error/errors/BadRequest')
 const EntityNotFound = require('../error/errors/EntityNotFound')

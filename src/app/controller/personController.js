@@ -1,4 +1,4 @@
-const PersonService = require('../service/personService')
+const PersonService = require('../service/PersonService')
 
 const BadRequest = require('../error/errors/BadRequest')
 const EntityNotFound = require('../error/errors/EntityNotFound')

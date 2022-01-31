@@ -1,4 +1,4 @@
-const CarRepository = require('../repository/carRepository')
+const CarRepository = require('../repository/CarRepository')
 
 const EntityNotFound = require('../error/errors/EntityNotFound')
 const UniqueEntryError = require('../error/errors/UniqueEntryError')
@@ -12,7 +12,7 @@ class CarService {
       if (error.name === 'ServerError' && error.code === 11000) {
         throw new UniqueEntryError(
           'Veiculos',
-          Object.keys(error.keyPattern).map(key => key)
+          Object.keys(error.keyPattern).map((key) => key)
         )
       } else {
         throw error

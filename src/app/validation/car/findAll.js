@@ -1,5 +1,5 @@
 const Joi = require('joi').extend(require('@joi/date'))
-const BadRequest = require('../../../error/errors/BadRequest')
+const BadRequest = require('../../error/errors/BadRequest')
 
 module.exports = async (req, res, next) => {
   try {
@@ -22,7 +22,8 @@ module.exports = async (req, res, next) => {
           Joi.object({
             descricao: Joi.string()
               .required()
-          })),
+          })
+        ),
 
       quantidadePassageiros: Joi.number()
         .integer(),
@@ -36,7 +37,7 @@ module.exports = async (req, res, next) => {
     const { error } = await schema.validate(req.query, { abortEarl: true })
 
     if (error) {
-      throw new BadRequest({ details: error.details.map(err => err.message) })
+      throw new BadRequest({ details: error.details.map((err) => err.message) })
     }
 
     next()
