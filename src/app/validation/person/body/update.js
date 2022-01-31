@@ -7,9 +7,11 @@ module.exports = async (req, res, next) => {
   try {
     const schema = Joi.object({
       nome: Joi.string()
+        .trim()
         .required(),
 
       cpf: Joi.string()
+        .trim()
         .min(11)
         .max(11)
         .custom((value, help) => {
@@ -27,17 +29,18 @@ module.exports = async (req, res, next) => {
         .required(),
 
       email: Joi.string()
+        .trim()
         .email()
         .required(),
-
-      senha: Joi.string()
-        .min(6),
 
       habilitado: Joi.string()
         .required()
     })
 
-    const { error } = await schema.validate(req.body, { abortEarl: true })
+    const { error } = await schema.validate(req.body, {
+      abortEarly: false,
+      allowUnknown: false
+    })
 
     if (error) {
       throw new BadRequest({ details: error.details.map(err => err.message) })
