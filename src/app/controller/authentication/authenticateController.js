@@ -1,30 +1,38 @@
 const bcrypt = require('bcryptjs');
-const schema = require('../../schema/personSchema');
 
+const AuthService = require('../../service/AuthService');
 const generateToken = require('../../helper/generateToken');
 
+const NotFound = require('../../error/errors/NotFound');
+
 class AuthenticateController {
-	 async authenticate(req, res) {
+	 async authenticate(req, res, next) {
 		const { email, senha } = req.body;
-		const user = await schema.findOne({ email }).select('+senha');
+		try {
+			const user = await AuthService.findAuth({email});
 
-		if (!user) {
-			return res.status(400).json({ error: 'user not found' });
-		}
+			if (!user) {
+				throw new NotFound;
+			}
 
-		if (!await bcrypt.compare(senha, user.senha)) {
-			return res.status(400).json({ error: 'Invalid password' });
-		}
+			if (!await bcrypt.compare(senha, user.senha)) {
+				return res.status(400).json({ 
+					message: 'Bad Request',
+					details: [ 'Invalid password'] 
+				});
+			}
 
-		user.senha = undefined;
+			user.senha = undefined;
 
 		 res.send({
-			user,
-			token: generateToken({ id: user.id }),
-		});
+				user,
+				token: generateToken({ id: user.id }),
+			});
 		
+		} catch (error) {
+			next(error);
+		}
 	}
-	
 }
 
 module.exports = new AuthenticateController();

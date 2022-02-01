@@ -1,5 +1,4 @@
 const schema = require('../schema/personSchema');
-// const clearObject = require('../helper/clearObject')
 
 class PersonRepository {
 	async create (person) {
