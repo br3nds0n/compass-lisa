@@ -1,9 +1,9 @@
 exports.habilitado = [
-  'não',
-  'sim'
-]
+	'não',
+	'sim'
+];
 exports.email = [
-  'com',
-  'br',
-  'net'
-]
+	'com',
+	'br',
+	'net'
+];
