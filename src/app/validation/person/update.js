@@ -37,7 +37,7 @@ module.exports = async (req, res, next) => {
 		});
 
 		const { error } = await schema.validate(req.body, {
-			abortEarly: false,
+			abortEarly: true,
 			allowUnknown: false
 		});
 

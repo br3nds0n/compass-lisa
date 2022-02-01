@@ -9,7 +9,7 @@ class PersonService {
 			const result = await PersonRepository.create(person);
 			return result;
 		} catch (error) {
-			if (error.name === 'ServerError' && error.code === 11000) {
+			if (error.name === 'MongoServerError' && error.code === 11000) {
 				throw new UniqueEntryError(
 					'Clientes',
 					Object.keys(error.keyPattern).map((key) => key)

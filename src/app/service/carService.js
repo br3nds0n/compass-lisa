@@ -9,7 +9,7 @@ class CarService {
 			const result = await CarRepository.create(car);
 			return result;
 		} catch (error) {
-			if (error.name === 'ServerError' && error.code === 11000) {
+			if (error.name === 'MongoServerError' && error.code === 11000) {
 				throw new UniqueEntryError(
 					'Veiculos',
 					Object.keys(error.keyPattern).map((key) => key)
