@@ -1,16 +1,16 @@
-const mongoose = require('mongoose')
-require('dotenv').config()
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 class Database {
-  constructor () {
-    this.connect()
-  }
+	constructor () {
+		this.connect();
+	}
 
-  connect () {
-    return mongoose
-      .connect(process.env.DB_HOST)
-      .catch((error) => console.long(error))
-  }
+	connect () {
+		return mongoose
+			.connect(process.env.DB_HOST)
+			.catch((error) => console.long(error));
+	}
 }
 
-module.exports = new Database().connect()
+module.exports = new Database().connect();

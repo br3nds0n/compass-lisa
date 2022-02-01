@@ -1,10 +1,10 @@
-const jwt = require('jsonwebtoken')
-const authConfig = require('../config/authenticate.json')
+const jwt = require('jsonwebtoken');
+const authConfig = require('../config/authenticate.json');
 
 function generateToken (params = {}) {
-  return jwt.sign({ params }, authConfig.secret, {
-    expiresIn: 86400
-  })
+	return jwt.sign({ params }, authConfig.secret, {
+		expiresIn: 86400
+	});
 }
 
-module.exports = generateToken
+module.exports = generateToken;

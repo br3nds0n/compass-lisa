@@ -1,9 +1,9 @@
-const router = require('express').Router()
+const router = require('express').Router();
 
-const carRouter = require('./carRouter')
-const person = require('./personRouter')
-const authenticate = require('./authenticateRouter')
+const carRouter = require('./carRouter');
+const person = require('./personRouter');
+const authenticate = require('./authenticateRouter');
 
-router.use(carRouter, person, authenticate)
+router.use(carRouter, person, authenticate);
 
-module.exports = router
+module.exports = router;
