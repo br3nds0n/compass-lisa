@@ -2,6 +2,7 @@ const express = require('express');
 
 const routes = require('./routes');
 require('./infra/database/mongo');
+
 const erroModify = require('./app/error/erroModify');
 
 class App {
@@ -23,6 +24,7 @@ class App {
 
 	erroModify() {
 		this.server.use(erroModify);
+		
 	}
 }
 
