@@ -38,6 +38,9 @@ class PersonService {
 	async delete (id) {
 		const result = await PersonRepository.delete(id);
 
+		if (result === null) {
+			throw new EntityNotFound(`Cannot find customer with ID = '${id}'`);
+		}
 		return result;
 	}
 
