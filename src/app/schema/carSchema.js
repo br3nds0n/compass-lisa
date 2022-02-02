@@ -22,6 +22,7 @@ const schema = new Schema({
 	},
 	quantidadePassageiros: {
 		type: Number,
+		minLength: 1,
 		required: true
 	}
 });
