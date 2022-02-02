@@ -12,6 +12,8 @@ const schema = new Schema({
 	},
 	cpf: {
 		type: String,
+		minLength:11,
+		maxLength: 11,
 		unique: true,
 		required: true
 	},
@@ -26,6 +28,7 @@ const schema = new Schema({
 	},
 	senha: {
 		type: String,
+		minLength: 6,
 		required: true,
 		select: false
 	},
