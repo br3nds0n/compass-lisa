@@ -39,7 +39,7 @@ describe('Feature tests', () => {
 				.get(url);
 
 			expect(res.statusCode).toBe(200);
-			expect(res.body.total).toBe(1);
+			expect(res.body.total).toBe(0);
 		});
 	});
 });
