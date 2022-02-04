@@ -147,6 +147,9 @@ $ npm run dev
 # Use o script de tests
 $ npm run test
 ```
+> Resultado esperado:
+<img src="https://user-images.githubusercontent.com/82064724/152529344-dff51be3-ad25-4814-8ee8-8679710ac476.png">
+
 <br>
 
  ### 🚐 Car
