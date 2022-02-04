@@ -142,6 +142,12 @@ $ npm run dev
 ---
 
 ## 🧪 Testando rotas
+> Para testar as rotas abra um novo terminal:
+```bash
+# Use o script de de tests
+$ npm run test
+```
+<br>
 
  ### 🚐 Car
 > <h4><b>POST:</b> <code>http://localhost:3000/api/v1/car</code></h4> 
