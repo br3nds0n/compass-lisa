@@ -4,9 +4,9 @@
 </p>
 
 
-Bem-vindo(a). Ao desafio Final!!
+Bem-vindo(a). Ao desafio Final!
 
-Opa dev tudo bem?! Meu nome é Brendson sou o [autor](#-Autor) desse projeto, que espelha todo meu conhecimento adquirido ao decorrer do programa de bolsas. Venho através desse repositório entregar a primeira parte do desafio. Espero que goste!
+Opa dev tudo bem?! Meu nome é Brendson sou o [autor](#-Autor) desse projeto, que espelha todo meu conhecimento adquirido ao decorrer do programa de bolsas. Venho através desse repositório entregar a primeira parte do desafio. Espero que goste!!
 
 Vamos ao projeto! `#dreamBigger🚀💛`
 
@@ -142,6 +142,15 @@ $ npm run dev
 ---
 
 ## 🧪 Testando rotas
+> Para testar as rotas abra um novo terminal:
+```bash
+# Use o script de tests
+$ npm run test
+```
+> Resultado esperado:
+<img src="https://user-images.githubusercontent.com/82064724/152529344-dff51be3-ad25-4814-8ee8-8679710ac476.png">
+
+<br>
 
  ### 🚐 Car
 > <h4><b>POST:</b> <code>http://localhost:3000/api/v1/car</code></h4> 
