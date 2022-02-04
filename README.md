@@ -148,7 +148,7 @@ $ npm run dev
 $ npm run test
 ```
 > Resultado esperado:
-<img src="https://user-images.githubusercontent.com/82064724/152529117-792e3610-7824-4904-aacd-bd1f165fcfdf.png">
+<img src="https://user-images.githubusercontent.com/82064724/152529344-dff51be3-ad25-4814-8ee8-8679710ac476.png">
 
 <br>
 
