@@ -144,11 +144,11 @@ $ npm run dev
 ## 🧪 Testando rotas
 > Para testar as rotas abra um novo terminal:
 ```bash
-# Use o script de de tests
+# Use o script de tests
 $ npm run test
 ```
 > Resultado esperado:
-<img height="" width="" src="https://user-images.githubusercontent.com/82064724/152528588-fbb4a6d5-6d3f-450b-8fce-eb7e5459b97d.png">
+<img width="850" src="https://user-images.githubusercontent.com/82064724/152528588-fbb4a6d5-6d3f-450b-8fce-eb7e5459b97d.png">
 
 <br>
 
