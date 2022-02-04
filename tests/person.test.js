@@ -20,7 +20,6 @@ describe('Test-Feature-Person', () => {
 	});
 
 	afterAll(async () => {
-		await mongoose.connection.dropDatabase();
 		await mongoose.connection.close();
 	});
 

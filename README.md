@@ -144,7 +144,7 @@ $ npm run dev
 ## 🧪 Testando rotas
 > Para testar as rotas abra um novo terminal:
 ```bash
-# Use o script de de tests
+# Use o script de tests
 $ npm run test
 ```
 <br>
