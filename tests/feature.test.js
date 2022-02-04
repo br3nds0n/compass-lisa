@@ -1,45 +1,26 @@
 const supertest = require('supertest');
-const mongoose = require('mongoose');
 
 const App = require('../src/app');
 
-const personService = require('../src/app/service/personService');
+describe('test-Feature', () => {
+	it('GET /api/v1/people - find All', async ()=>{
+		const res = await supertest(App).get('/api/v1/people');
 
-describe('Feature tests', () => {
-	const route = 'api/v1';
-	const entities = {
-		person: {}
-	};
-	let app;
-
-	beforeAll(async () => {
-		app = await App;
-
-		entities.person.p1 = await personService.create({
-			nome:'Brendson Victor',
-			cpf:'71255973439',
-			email:'brendson@exemple.com',
-			data_nascimento:'23/04/2003',
-			senha:'123456',
-			habilitado:'sim',
-		});
-
+		expect(res.statusCode).toBe(200);
 	});
 
-	afterAll(async () => {
-		await mongoose.connection.dropDatabase();
-		await mongoose.connection.close();
-	});
+	it('POST /api/v1/people', async ()=> {
+		const res = await supertest(App)
+			.post('/api/v1/people')
+			.send({
+				nome: 'bredson',
+				cpf: '71255973439',
+				data_nascimento:'23/04/2003',
+				email:'brendson@exemple.com',
+				senha: '123456',
+				habilitado: 'sim'
+			});
 
-	describe(`GET ${route}/people - Find All`, () => {
-		const url = `${route}/people`;
-
-		it('Should return sucess when pass with no paramters', async () => {
-			const res = await supertest(app)
-				.get(url);
-
-			expect(res.statusCode).toBe(200);
-			expect(res.body.total).toBe(0);
-		});
+		expect(res.statusCode).toBe(201);
 	});
 });
