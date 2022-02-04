@@ -9,7 +9,7 @@ class Database {
 	connect () {
 		return mongoose
 			.connect(process.env.DB_HOST)
-			.catch((error) => console.log(error));
+			.catch((error) => console.long(error));
 	}
 }
 
