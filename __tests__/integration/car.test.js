@@ -1,8 +1,8 @@
 const supertest = require('supertest');
 const mongoose = require('mongoose');
 
-const App = require('../src/app');
-const carService = require('../src/app/service/carService');
+const App = require('../../src/app');
+const carService = require('../../src/app/service/carService');
 
 const car = {};
 

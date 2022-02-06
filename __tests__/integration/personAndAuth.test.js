@@ -1,8 +1,8 @@
 const supertest = require('supertest');
 const mongoose = require('mongoose');
 
-const App = require('../src/app');
-const personService = require('../src/app/service/personService');
+const App = require('../database/index');
+const personService = require('../../src/app/service/personService');
 
 const person = {};
 
@@ -17,9 +17,19 @@ describe('Test-Feature-Person', () => {
 			senha: '123456',
 			habilitado: 'sim'
 		});
+
+		person.p2 = await personService.create({
+			nome: 'julia',
+			cpf: '45571193406',
+			data_nascimento:'23/04/2003',
+			email:'julia@exemple.com',
+			senha: '123456',
+			habilitado: 'sim'
+		});
 	});
 
 	afterAll(async () => {
+		await mongoose.connection.dropDatabase();
 		await mongoose.connection.close();
 	});
 
@@ -73,5 +83,22 @@ describe('Test-Feature-Person', () => {
 			.delete(`/api/v1/people/${person.p1._id}`);
 
 		expect(res.statusCode).toBe(204);
+	});
+
+	/* 
+     authenticate
+	*/
+
+	describe('Test-Feature-Authenticate', () => {
+	
+		it('POST /api/v1/authenticate', async ()=> {
+			const res = await supertest(App)
+				.post('/api/v1/authenticate')
+				.send({		
+					email:'julia@exemple.com',
+					senha: '123456',
+				});
+			expect(res.statusCode).toBe(200);
+		});
 	});
 });
