@@ -1,6 +1,6 @@
-const Joi = require('joi').extend(require('@joi/date'));
+const Joi = require('joi');
 
-const BadRequest = require('../error/errors/BadRequest');
+const BadRequest = require('../error/http/BadRequest');
 
 module.exports = async (req, res, next) => {
 	try {
@@ -10,7 +10,7 @@ module.exports = async (req, res, next) => {
 				.max(24)
 		});
 
-		const { error } = await schema.validate(req.query, { abortEarl: true });
+		const { error } = await schema.validate(req.params, { abortEarl: true });
 		if (error) throw error;
 
 		if (error) {

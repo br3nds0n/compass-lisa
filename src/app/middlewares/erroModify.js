@@ -1,4 +1,4 @@
-const HttpError = require('./errors/httpError');
+const HttpError = require('../error/http/httpError');
 
 module.exports = function (err, req, res, next) {
 	if (err instanceof HttpError) {

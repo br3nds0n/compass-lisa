@@ -4,7 +4,7 @@ const isCpf = require('../../helper/isCpf');
 const isYear18 = require('../../helper/isYear18');
 const ENUM = require('../../helper/enum');
 
-const BadRequest = require('../../error/errors/BadRequest');
+const BadRequest = require('../../error/http/BadRequest');
 
 module.exports = async (req, res, next) => {
 	try {

@@ -1,9 +1,9 @@
 const CarService = require('../service/CarService');
 
-const BadRequest = require('../error/errors/BadRequest');
-const EntityNotFound = require('../error/errors/EntityNotFound');
-const NotFound = require('../error/errors/NotFound');
-const UniqueEntryError = require('../error/errors/UniqueEntryError');
+const BadRequest = require('../error/http/BadRequest');
+const EntityNotFound = require('../error/EntityNotFound');
+const NotFound = require('../error/http/NotFound');
+const UniqueEntryError = require('../error/UniqueEntryError');
 
 class CarController {
 	async create(req, res, next) {
