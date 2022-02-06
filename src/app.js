@@ -3,6 +3,7 @@ const express = require('express');
 const routes = require('./routes');
 require('./infra/database/mongo');
 
+const cors = require('cors');
 const erroModify = require('./app/middlewares/erroModify');
 
 class App {
@@ -19,6 +20,7 @@ class App {
 
 	middlewares() {
 		this.server.use(express.urlencoded({ extended: true }));
+		this.server.use(cors());
 		this.server.use(express.json());
 	}
 
