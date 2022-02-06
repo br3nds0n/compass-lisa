@@ -3,7 +3,7 @@ const express = require('express');
 const routes = require('./routes');
 require('./infra/database/mongo');
 
-const erroModify = require('./app/error/erroModify');
+const erroModify = require('./app/middlewares/erroModify');
 
 class App {
 	constructor() {

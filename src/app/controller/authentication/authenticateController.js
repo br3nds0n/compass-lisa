@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const AuthService = require('../../service/AuthService');
 const generateToken = require('../../helper/generateToken');
 
-const NotFound = require('../../error/errors/NotFound');
+const NotFound = require('../../error/http/NotFound');
 
 class AuthenticateController {
 	 async authenticate(req, res, next) {

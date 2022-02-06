@@ -1,7 +1,7 @@
 const PersonRepository = require('../repository/PersonRepository');
 
-const EntityNotFound = require('../error/errors/EntityNotFound');
-const UniqueEntryError = require('../error/errors/UniqueEntryError');
+const EntityNotFound = require('../error/EntityNotFound');
+const UniqueEntryError = require('../error/UniqueEntryError');
 
 class PersonService {
 	async create (person) {

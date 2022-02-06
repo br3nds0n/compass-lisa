@@ -1,7 +1,7 @@
 const CarRepository = require('../repository/CarRepository');
 
-const EntityNotFound = require('../error/errors/EntityNotFound');
-const UniqueEntryError = require('../error/errors/UniqueEntryError');
+const EntityNotFound = require('../error/EntityNotFound');
+const UniqueEntryError = require('../error/UniqueEntryError');
 
 class CarService {
 	async create (car) {

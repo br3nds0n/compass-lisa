@@ -1,7 +1,7 @@
-const Joi = require('joi').extend(require('@joi/date'));
+const Joi = require('joi');
 const ENUM = require('../../helper/enum');
 
-const BadRequest = require('../../error/errors/BadRequest');
+const BadRequest = require('../../error/http/BadRequest');
 
 module.exports = async (req, res, next) => {
 	try {
