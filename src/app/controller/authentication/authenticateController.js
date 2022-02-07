@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 
 const AuthService = require('../../service/AuthService');
-const generateToken = require('../../helper/generateToken');
+const generateToken = require('../../helper/functions/generateToken');
 
 const NotFound = require('../../error/http/NotFound');
 
