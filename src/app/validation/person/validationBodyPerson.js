@@ -1,8 +1,8 @@
 const Joi = require('joi').extend(require('@joi/date'));
 
-const isCpf = require('../../helper/isCpf');
-const isYear18 = require('../../helper/isYear18');
-const ENUM = require('../../helper/enum');
+const isCpf = require('../../helper/functions/isCpf');
+const isYear18 = require('../../helper/functions/isYear18');
+const ENUM = require('../../helper/utils/enum');
 
 const BadRequest = require('../../error/http/BadRequest');
 

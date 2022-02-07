@@ -100,5 +100,15 @@ describe('Test-Feature-Person', () => {
 				});
 			expect(res.statusCode).toBe(200);
 		});
+
+		it('POST /api/v1/authenticate', async ()=>{
+			const res = await supertest(App)
+				.post('/api/v1/authenticate')
+				.send({
+					email:'',
+					senha: '123456'
+				});
+			expect(res.statusCode).toBe(400);
+		});
 	});
 });

@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const ENUM = require('../../helper/enum');
+const ENUM = require('../../helper/utils/enum');
 
 const BadRequest = require('../../error/http/BadRequest');
 

@@ -1,5 +1,5 @@
 const Joi = require('joi').extend(require('@joi/date'));
-const isCpf = require('../../helper/isCpf');
+const isCpf = require('../../helper/functions/isCpf');
 
 const BadRequest = require('../../error/http/BadRequest');
 
