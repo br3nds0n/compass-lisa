@@ -25,6 +25,10 @@ class RentalRepository {
 		};
 		return schema.paginate(payload, options, {});
 	}
+
+	async delete (id) {
+		return schema.findByIdAndDelete(id);
+	}
 }
 
 module.exports = new RentalRepository();
