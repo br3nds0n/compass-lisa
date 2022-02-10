@@ -16,10 +16,11 @@ const schema = new Schema({
 		type: String,
 		required: true
 	},
-	acessorios: {
-		type: Array,
-		required: true
-	},
+	acessorios: [
+		{
+			descricao: { type: String, required: true}
+		}
+	],
 	quantidadePassageiros: {
 		type: Number,
 		minLength: 1,

@@ -66,7 +66,7 @@ describe('Test-Feature-Car', () => {
 				ano: '2021',
 				acessorios: [
 					{ descricao: 'Ar-condicionado' },
-					{ descricao: 'Dir. Hidráulica' },
+					{ descricao: 'Dir.Hidráulica' },
 				],
 				quantidadePassageiros: 5
 			});

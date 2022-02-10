@@ -46,6 +46,16 @@ class CarService {
 	async update (id, payload) {
 		const result = await CarRepository.update(id, payload);
 
+		if (result === null) {
+			throw new EntityNotFound(`Cannot find vehicle with ID = '${id}'`);
+		}
+		
+		return result;
+	}
+
+	async updateAccessory (id, acessorioId, payload) {
+		const result = await CarRepository.updateAccessory(id, acessorioId, payload);
+	
 		return result;
 	}
 }
