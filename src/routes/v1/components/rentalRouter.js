@@ -3,6 +3,7 @@ const RentalController = require('../../../app/controller/RentalController');
 
 
 router
-	.post('/rental', RentalController.create);
+	.post('/rental', RentalController.create)
+	.get('/rental', RentalController.findAll);
 
 module.exports = router;
