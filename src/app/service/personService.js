@@ -46,6 +46,7 @@ class PersonService {
 
 	async update (id, payload) {
 		const result = await PersonRepository.update(id, payload);
+		
 		return result;
 	}
 }

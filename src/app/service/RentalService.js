@@ -18,6 +18,12 @@ class RentalService {
 
 		return result;
 	}
+
+	async update (id, payload) {
+		const result = await RentalRepository.update(id, payload);
+
+		return result;
+	}
 }
 
 module.exports = new RentalService();

@@ -29,6 +29,10 @@ class RentalRepository {
 	async delete (id) {
 		return schema.findByIdAndDelete(id);
 	}
+
+	async update (id, payload) {
+		return schema.findByIdAndUpdate(id, payload, { new: true });
+	}
 }
 
 module.exports = new RentalRepository();
