@@ -52,6 +52,20 @@ class RentalController {
 			}
 		}
 	}
+
+	async update (req, res, next) {
+		const { id } = req.params;
+		const newPerson = req.body;
+		try {
+			const result = await RentalService.update(id, newPerson);
+			return res.status(200).json(result);
+		} catch (error) {
+			if (error instanceof EntityNotFound) {
+				next(new NotFound(error.message));
+			}
+			next(error);
+		}
+	}
 }
 
 module.exports = new RentalController();
