@@ -12,6 +12,12 @@ class RentalService {
 
 		return result;
 	}
+
+	async delete (id) {
+		const result = await RentalRepository.delete(id);
+
+		return result;
+	}
 }
 
 module.exports = new RentalService();

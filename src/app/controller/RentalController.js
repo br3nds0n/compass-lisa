@@ -2,6 +2,8 @@ const RentalService = require('../service/RentalService');
 const axios = require('axios');
 
 const BadRequest = require('../error/http/BadRequest');
+const EntityNotFound = require('../error/EntityNotFound');
+const NotFound = require('../error/http/NotFound');
 const UniqueEntryError = require('../error/UniqueEntryError');
 
 class RentalController {
@@ -34,6 +36,20 @@ class RentalController {
 			return res.status(200).json(result);
 		} catch (error) {
 			next(error);
+		}
+	}
+
+	async delete (req, res, next) {
+		const { id } = req.params;
+		try {
+			await RentalService.delete(id);
+			return res.status(204).end();
+		} catch (error) {
+			if (error instanceof EntityNotFound) {
+				next(new NotFound(error.message));
+			} else {
+				next(error);
+			}
 		}
 	}
 }
