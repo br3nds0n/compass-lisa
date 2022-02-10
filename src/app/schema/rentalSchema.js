@@ -11,6 +11,8 @@ const schema = new Schema({
 	cnpj: {
 		type: String,
 		unique: true,
+		minLength:14,
+		maxLength: 14,
 		required: true
 	},
 	atividades: {
@@ -35,6 +37,7 @@ const schema = new Schema({
 schema.method('toJSON', function () {
 	const { ...rental } = this.toObject();
 
+	rental.cnpj = rental.cnpj.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
 	rental.__v = undefined;
 
 	return rental;
