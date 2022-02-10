@@ -23,7 +23,7 @@ const schema = new Schema({
 			number: { type: String, required: true },
 			complemento: { type: String, required: false },
 			isFilial: { type: Boolean, required: true },
-			logadouro: { type: String, required: false  },
+			logradouro: { type: String, required: false  },
 			bairro: { type: String, required: false  },
 			localidade: { type: String, required: false  }, 
 			uf: { type: String, required: false  },

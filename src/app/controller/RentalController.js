@@ -14,9 +14,9 @@ class RentalController {
 			const  { cep }  = endereco;
 			
 			const { data } = await axios.get(`https://viacep.com.br/ws/${cep}/json`);
-			const { logadouro, bairro, localidade, uf } = data;
+			const { logradouro , bairro, localidade, uf } = data;
 			
-			Object.assign(endereco, { logadouro: logadouro, bairro: bairro, localidade: localidade, uf: uf });
+			Object.assign(endereco, { logradouro : logradouro , bairro: bairro, localidade: localidade, uf: uf });
 
 			const result = await RentalService.create(payload);
 
