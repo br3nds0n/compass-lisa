@@ -69,6 +69,21 @@ class CarController {
 			next(error);
 		}
 	}
+
+	async updateAccessory (req, res, next) {
+		const { id, acessorioId } = req.params;
+		const payload  = req.body;
+		try {
+			const result = await CarService.updateAccessory(id, acessorioId, payload);
+
+			return res.status(200).json(result);
+		} catch (error) {
+			if (error instanceof EntityNotFound) {
+				next(new NotFound(error.message));
+			}
+			next(error);
+		}
+	}
 }
 
 module.exports = new CarController();
