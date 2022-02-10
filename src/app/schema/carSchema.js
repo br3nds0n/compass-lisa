@@ -18,7 +18,7 @@ const schema = new Schema({
 	},
 	acessorios: [
 		{
-			descricao: { type: String, required: true}
+			descricao: { type: String, required: true }
 		}
 	],
 	quantidadePassageiros: {
