@@ -66,6 +66,19 @@ class RentalController {
 			next(error);
 		}
 	}
+
+	async getById (req, res, next) {
+		const { id } = req.params;
+		try {
+			const result = await RentalService.findById(id);
+			return res.status(200).json(result);
+		} catch (error) {
+			if (error instanceof EntityNotFound) {
+				next(new NotFound(error.message));
+			}
+			next(error);
+		}
+	}
 }
 
 module.exports = new RentalController();
