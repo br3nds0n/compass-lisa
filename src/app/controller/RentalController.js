@@ -6,14 +6,17 @@ const UniqueEntryError = require('../error/UniqueEntryError');
 
 class RentalController {
 	async create(req, res, next) {
-		const { endereco } = req.body;
+		const payload = req.body;
 		try {
-			const cep = endereco.map( cep => cep.cep );
-			const response = await axios.get(`https://viacep.com.br/ws/${cep}/json`);
+			const endereco = payload.endereco.find( element => element !== undefined );
+			const  { cep }  = endereco;
 			
-			console.log(response.data);
+			const { data } = await axios.get(`https://viacep.com.br/ws/${cep}/json`);
+			const { logadouro, bairro, localidade, uf } = data;
+			
+			Object.assign(endereco, { logadouro: logadouro, bairro: bairro, localidade: localidade, uf: uf });
 
-			const result = await RentalService.create(req.body);
+			const result = await RentalService.create(payload);
 
 			return res.status(201).json(result);
 		} catch (error) {
@@ -21,6 +24,16 @@ class RentalController {
 				next(new BadRequest({ details: error.message }));
 		 }
 		 next(error);
+		}
+	}
+
+	async findAll(req, res, next) {
+		const payload = req.query;
+		try {
+			const result = await RentalService.findAll(payload);
+			return res.status(200).json(result);
+		} catch (error) {
+			next(error);
 		}
 	}
 }
