@@ -33,6 +33,10 @@ class RentalRepository {
 	async update (id, payload) {
 		return schema.findByIdAndUpdate(id, payload, { new: true });
 	}
+
+	async findById (id) {
+		return schema.findById(id);
+	}
 }
 
 module.exports = new RentalRepository();

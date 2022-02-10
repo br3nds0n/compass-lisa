@@ -24,6 +24,12 @@ class RentalService {
 
 		return result;
 	}
+
+	async findById (id) {
+		const result = await RentalRepository.findById(id);
+
+		return result;
+	}
 }
 
 module.exports = new RentalService();
