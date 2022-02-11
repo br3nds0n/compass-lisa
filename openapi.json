@@ -1,114 +1,49 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "compass_lisa",
-    "description": "Api CompassoLisa Dealership.",
-    "version": "1.0.0"
+    "title": "CompassoLisa Dealership",
+    "description": "API for car rental Compassolisa 🚐.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Brendson Victor",
+      "email": "brendson.net@gmail.com"
+    }
   },
   "externalDocs": {
-    "description": "Documentation",
-    "url": "https://github.com/br3nds0n/compass-lisa/"
+    "description": "Project Repository",
+    "url": "https://github.com/br3nds0n/compass-lisa"
   },
   "servers": [
     {
-      "url": "http://localhost:3000/api/v1/",
-      "description": "Routes"
+      "url": "http://localhost:3000/api/v1",
+      "description": "Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Vehicles",
+      "description": "Vehicle Routes"
+    },
+    {
+      "name": "People",
+      "description": "People Routes"
+    },
+    {
+      "name": "Authentication",
+      "description": "People Authentication"
+    },
+    {
+      "name": "Rental",
+      "description": "Rentals Routes"
     }
   ],
   "paths": {
     "/car": {
-      "get": {
-        "summary": "Returns all cars.",
-        "parameters": [
-          {
-            "name": "modelo",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "required": false
-          },
-          {
-            "name": "cor",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "required": false
-          },
-          {
-            "name": "ano",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "required": false
-          },
-          {
-            "name": "acessorios",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "required": false
-          },
-          {
-            "name": "quantidadePassageiros",
-            "in": "query",
-            "schema": {
-              "type": "number"
-            },
-            "required": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "Veiculos": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "modelo": {
-                            "type": "string"
-                          },
-                          "cor": {
-                            "type": "string"
-                          },
-                          "ano": {
-                            "type": "string"
-                          },
-                          "acessorios": {
-                            "type": "string"
-                          },
-                          "quantidadePassageiros": {
-                            "type": "number"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "car not found",
-            "content": {
-              "application/json": {
-                "example": "not found"
-              }
-            }
-          }
-        }
-      },
       "post": {
-        "summary": "Create a new car.",
+        "tags": [
+          "Vehicles"
+        ],
+        "summary": "Vehicle Register",
         "requestBody": {
           "content": {
             "application/json": {
@@ -116,19 +51,32 @@
                 "type": "object",
                 "properties": {
                   "modelo": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Ferrai de Diego"
                   },
                   "cor": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "vermelha"
                   },
                   "ano": {
-                    "type": "string"
+                    "type": "number",
+                    "example": 2021
                   },
                   "acessorios": {
-                    "type": "string"
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "descricao": {
+                          "type": "string",
+                          "example": "4 Portas"
+                        }
+                      }
+                    }
                   },
                   "quantidadePassageiros": {
-                    "type": "number"
+                    "type": "number",
+                    "example": 5
                   }
                 }
               }
@@ -144,19 +92,27 @@
                   "type": "object",
                   "properties": {
                     "_id": {
-                      "type": "string"
+                      "type": "number"
                     },
-                    "moddelo": {
+                    "modelo": {
                       "type": "string"
                     },
                     "cor": {
                       "type": "string"
                     },
                     "ano": {
-                      "type": "string"
+                      "type": "number"
                     },
                     "acessorios": {
-                      "type": "string"
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "descricao": {
+                            "type": "string"
+                          }
+                        }
+                      }
                     },
                     "quantidadePassageiros": {
                       "type": "number"
@@ -167,10 +123,133 @@
             }
           },
           "400": {
-            "description": "Error",
+            "description": "Bad Request"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Vehicles"
+        ],
+        "summary": "Query all vehicles or by parameters",
+        "parameters": [
+          {
+            "name": "modelo",
+            "in": "query",
+            "description": "Model",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cor",
+            "in": "query",
+            "description": "Color",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ano",
+            "in": "query",
+            "description": "Year",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "descricao",
+            "in": "query",
+            "description": "Accessories",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "quantidadePassageiros",
+            "in": "query",
+            "description": "Number of Passengers",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "page result limit",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "total",
+            "in": "query",
+            "description": "total pages",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "pages skipped after offset",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offsets",
+            "in": "query",
+            "description": "first result skipped pages",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "content": {
               "application/json": {
-                "example": "unable to register a new car"
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "veiculos": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "number"
+                          },
+                          "modelo": {
+                            "type": "string"
+                          },
+                          "cor": {
+                            "type": "string"
+                          },
+                          "ano": {
+                            "type": "number"
+                          },
+                          "acessorios": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "descricao": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "quantidadePassageiros": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -178,41 +257,103 @@
       }
     },
     "/car/{id}": {
-      "put": {
-        "summary": "Upgrade a car.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
-          }
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }
+      ],
+      "get": {
+        "tags": [
+          "Vehicles"
         ],
+        "summary": "Search vehicle by ID",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "number"
+                    },
+                    "modelo": {
+                      "type": "string"
+                    },
+                    "cor": {
+                      "type": "string"
+                    },
+                    "ano": {
+                      "type": "number"
+                    },
+                    "acessorios": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "descricao": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "quantidadePassageiros": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Vehicles"
+        ],
+        "summary": "Changes the properties of a vehicle found by Id",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
-                  "_id": {
-                    "type": "string"
-                  },
-                  "moddelo": {
-                    "type": "string"
+                  "modelo": {
+                    "type": "string",
+                    "example": "Ferrai de Giovanni"
                   },
                   "cor": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "preta"
                   },
                   "ano": {
-                    "type": "string"
+                    "type": "number",
+                    "example": 2020
                   },
                   "acessorios": {
-                    "type": "string"
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "descricao": {
+                          "type": "string",
+                          "example": "Ar Condicionado"
+                        }
+                      }
+                    }
                   },
                   "quantidadePassageiros": {
-                    "type": "number"
+                    "type": "number",
+                    "example": 5
                   }
                 }
               }
@@ -221,26 +362,34 @@
         },
         "responses": {
           "200": {
-            "description": "successfully updated.",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "_id": {
-                      "type": "string"
+                      "type": "number"
                     },
-                    "moddelo": {
+                    "modelo": {
                       "type": "string"
                     },
                     "cor": {
                       "type": "string"
                     },
                     "ano": {
-                      "type": "string"
+                      "type": "number"
                     },
                     "acessorios": {
-                      "type": "string"
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "descricao": {
+                            "type": "string"
+                          }
+                        }
+                      }
                     },
                     "quantidadePassageiros": {
                       "type": "number"
@@ -251,61 +400,380 @@
             }
           },
           "400": {
-            "description": "Body Error",
-            "content": {
-              "application/json": {
-                "example": "Body error"
-              }
-            }
+            "description": "Bad Request"
           },
           "404": {
-            "description": "car not found",
-            "content": {
-              "application/json": {
-                "example": "unable to update car"
-              }
-            }
+            "description": "Not Found"
           }
         }
       },
       "delete": {
-        "summary": "Delete a car.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
-          }
+        "tags": [
+          "Vehicles"
         ],
+        "summary": "Delete a vehicle found by Id",
         "responses": {
           "204": {
-            "description": "successfully deleted"
+            "description": "No Content"
           },
           "400": {
-            "description": "Body Error",
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/car/{id}/acessorios/{acessorioId}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        },
+        {
+          "name": "acessorioId",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }
+      ],
+      "patch": {
+        "tags": [
+          "Vehicles"
+        ],
+        "summary": "Changes the properties of the description found by the Id",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "descricao": {
+                    "type": "string",
+                    "example": "Airbag"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
-                "example": "Body error"
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "number"
+                    },
+                    "modelo": {
+                      "type": "string"
+                    },
+                    "cor": {
+                      "type": "string"
+                    },
+                    "ano": {
+                      "type": "number"
+                    },
+                    "acessorios": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "descricao": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "quantidadePassageiros": {
+                      "type": "number"
+                    }
+                  }
+                }
               }
             }
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "404": {
-            "description": "car not found",
-            "content": {
-              "application/json": {
-                "example": "could not erase the car"
-              }
-            }
+            "description": "Not Found"
           }
         }
       }
     },
     "/people": {
       "post": {
-        "summary": "Create a new Person.",
+        "tags": [
+          "People"
+        ],
+        "summary": "Register Person",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string",
+                    "example": "Brendson Victor"
+                  },
+                  "cpf": {
+                    "type": "string",
+                    "example": "712.559.734-39"
+                  },
+                  "data_nascimento": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "23/04/2003"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "brendinho@example.com"
+                  },
+                  "senha": {
+                    "type": "string",
+                    "example": 123456
+                  },
+                  "habilitado": {
+                    "type": "string",
+                    "example": "sim",
+                    "enum": [
+                      "sim",
+                      "nao"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "nome": {
+                      "type": "string"
+                    },
+                    "cpf": {
+                      "type": "string"
+                    },
+                    "data_nascimento": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "habilitado": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "People"
+        ],
+        "summary": "Query all people or by parameters",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "query",
+            "description": "person's name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cpf",
+            "in": "query",
+            "description": "person's cpf",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "data_nascimento",
+            "in": "query",
+            "description": "person's date of birth",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "description": "person's email",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "habilitado",
+            "in": "query",
+            "description": "qualified person [sim , não]",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "page result limit",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "total",
+            "in": "query",
+            "description": "total pages",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "pages skipped after offset",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offsets",
+            "in": "query",
+            "description": "first result skipped pages",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "veiculos": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "number"
+                          },
+                          "nome": {
+                            "type": "string"
+                          },
+                          "cpf": {
+                            "type": "string"
+                          },
+                          "data_nascimento": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "habilitado": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/people/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }
+      ],
+      "get": {
+        "tags": [
+          "People"
+        ],
+        "summary": "Query person by ID",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "number"
+                    },
+                    "nome": {
+                      "type": "string"
+                    },
+                    "cpf": {
+                      "type": "string"
+                    },
+                    "data_nascimento": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "habilitado": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "People"
+        ],
+        "summary": "Change the properties of a person found by Id",
         "requestBody": {
           "content": {
             "application/json": {
@@ -319,16 +787,526 @@
                     "type": "string"
                   },
                   "data_nascimento": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "date",
+                    "example": "23/04/2003"
                   },
                   "email": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "brendinho@example.com"
                   },
                   "senha": {
-                    "type": "string"
+                    "type": "string",
+                    "example": 123456
                   },
                   "habilitado": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "sim",
+                    "enum": [
+                      "sim",
+                      "não"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "number"
+                    },
+                    "nome": {
+                      "type": "string"
+                    },
+                    "cpf": {
+                      "type": "string"
+                    },
+                    "data_nascimento": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "habilitado": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "People"
+        ],
+        "summary": "Delete a user found by Id",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/authenticate": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Authenticate the People",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "brendinho@example.com"
+                  },
+                  "senha": {
+                    "type": "string",
+                    "example": 123456
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "habilitado": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/rental": {
+      "post": {
+        "tags": [
+          "Rental"
+        ],
+        "summary": "Register a Rental Company consuming ViaCep external api",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string",
+                    "example": "CompassoLisa"
+                  },
+                  "cnpj": {
+                    "type": "string",
+                    "example": 7654824000124
+                  },
+                  "atividades": {
+                    "type": "string",
+                    "example": "Aluga Veiculos"
+                  },
+                  "endereco": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "cep": {
+                          "type": "string",
+                          "example": 99010051
+                        },
+                        "number": {
+                          "type": "string",
+                          "example": 132
+                        },
+                        "isFilial": {
+                          "type": "boolean",
+                          "example": false
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "number"
+                    },
+                    "nome": {
+                      "type": "string"
+                    },
+                    "cnpj": {
+                      "type": "string"
+                    },
+                    "atividades": {
+                      "type": "string"
+                    },
+                    "endereco": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "cep": {
+                            "type": "string"
+                          },
+                          "logradouro": {
+                            "type": "string"
+                          },
+                          "complemento": {
+                            "type": "string"
+                          },
+                          "bairro": {
+                            "type": "string"
+                          },
+                          "number": {
+                            "type": "number"
+                          },
+                          "localidade": {
+                            "type": "string"
+                          },
+                          "uf": {
+                            "type": "string"
+                          },
+                          "isFilial": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Rental"
+        ],
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "query",
+            "description": "rental company name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cnpj",
+            "in": "query",
+            "description": "CNPJ of the rental company",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "atividades",
+            "in": "query",
+            "description": "Services provided by the lessor",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cep",
+            "in": "query",
+            "description": "Rental cep code",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "logradouro",
+            "in": "query",
+            "description": "Location of the rental company",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isFilial",
+            "in": "query",
+            "description": "If the rental company is a parent company or branch",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "page result limit",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "total",
+            "in": "query",
+            "description": "total pages",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "pages skipped after offset",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offsets",
+            "in": "query",
+            "description": "first result skipped pages",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Consult all rental companies, or by parameters",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "number"
+                    },
+                    "nome": {
+                      "type": "string"
+                    },
+                    "cnpj": {
+                      "type": "string"
+                    },
+                    "atividades": {
+                      "type": "string"
+                    },
+                    "endereco": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "cep": {
+                            "type": "string"
+                          },
+                          "logradouro": {
+                            "type": "string"
+                          },
+                          "complemento": {
+                            "type": "string"
+                          },
+                          "bairro": {
+                            "type": "string"
+                          },
+                          "number": {
+                            "type": "number"
+                          },
+                          "localidade": {
+                            "type": "string"
+                          },
+                          "uf": {
+                            "type": "string"
+                          },
+                          "isFilial": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/rental/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }
+      ],
+      "get": {
+        "tags": [
+          "Rental"
+        ],
+        "summary": "Query rental by ID",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "number"
+                    },
+                    "nome": {
+                      "type": "string"
+                    },
+                    "cnpj": {
+                      "type": "string"
+                    },
+                    "atividades": {
+                      "type": "string"
+                    },
+                    "endereco": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "cep": {
+                            "type": "string"
+                          },
+                          "logradouro": {
+                            "type": "string"
+                          },
+                          "complemento": {
+                            "type": "string"
+                          },
+                          "bairro": {
+                            "type": "string"
+                          },
+                          "number": {
+                            "type": "number"
+                          },
+                          "localidade": {
+                            "type": "string"
+                          },
+                          "uf": {
+                            "type": "string"
+                          },
+                          "isFilial": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Rental"
+        ],
+        "summary": "Change the properties of a rental company found by Id",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string",
+                    "example": "CompassoLisa"
+                  },
+                  "cnpj": {
+                    "type": "string",
+                    "example": 7654824000124
+                  },
+                  "atividades": {
+                    "type": "string",
+                    "example": "Aluga Veiculos"
+                  },
+                  "endereco": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "cep": {
+                          "type": "string",
+                          "example": 99010051
+                        },
+                        "number": {
+                          "type": "string",
+                          "example": 132
+                        },
+                        "isFilial": {
+                          "type": "boolean",
+                          "example": true
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -343,131 +1321,45 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "_id": {
+                      "type": "number"
+                    },
                     "nome": {
                       "type": "string"
                     },
-                    "cpf": {
+                    "cnpj": {
                       "type": "string"
                     },
-                    "data_nascimento": {
+                    "atividades": {
                       "type": "string"
                     },
-                    "email": {
-                      "type": "string"
-                    },
-                    "senha": {
-                      "type": "string"
-                    },
-                    "habilitado": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "example": "it was not possible to register a new person"
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "summary": "Returns all People",
-        "parameters": [
-          {
-            "name": "nome",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "required": false
-          },
-          {
-            "name": "people_id",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "required": false
-          },
-          {
-            "name": "cpf",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "required": false
-          },
-          {
-            "name": "data_nascimento",
-            "in": "query",
-            "schema": {
-              "type": "number"
-            },
-            "required": false
-          },
-          {
-            "name": "email",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "required": false
-          },
-          {
-            "name": "senha",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "required": false
-          },
-          {
-            "name": "habilitado",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "required": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "Pessoas": {
+                    "endereco": {
                       "type": "array",
                       "items": {
                         "type": "object",
                         "properties": {
-                          "nome": {
+                          "cep": {
                             "type": "string"
                           },
-                          "people_id": {
+                          "logradouro": {
                             "type": "string"
                           },
-                          "cpf": {
+                          "complemento": {
                             "type": "string"
                           },
-                          "data_nascimento": {
+                          "bairro": {
+                            "type": "string"
+                          },
+                          "number": {
                             "type": "number"
                           },
-                          "email": {
+                          "localidade": {
                             "type": "string"
                           },
-                          "senha": {
+                          "uf": {
                             "type": "string"
                           },
-                          "habilitado": {
+                          "isFilial": {
                             "type": "string"
                           }
                         }
@@ -478,207 +1370,28 @@
               }
             }
           },
-          "404": {
-            "description": "person not found",
-            "content": {
-              "application/json": {
-                "example": "not found"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/people/{id}": {
-      "put": {
-        "summary": "Update a Person.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "nome": {
-                    "type": "string"
-                  },
-                  "people_id": {
-                    "type": "string"
-                  },
-                  "cpf": {
-                    "type": "string"
-                  },
-                  "data_nascimento": {
-                    "type": "number"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "senha": {
-                    "type": "string"
-                  },
-                  "habilitado": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "successfully updated.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "nome": {
-                      "type": "string"
-                    },
-                    "people_id": {
-                      "type": "string"
-                    },
-                    "cpf": {
-                      "type": "string"
-                    },
-                    "data_nascimento": {
-                      "type": "number"
-                    },
-                    "email": {
-                      "type": "string"
-                    },
-                    "senha": {
-                      "type": "string"
-                    },
-                    "habilitado": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
           "400": {
-            "description": "Body Error",
-            "content": {
-              "application/json": {
-                "example": "Body error"
-              }
-            }
+            "description": "Bad Request"
           },
           "404": {
-            "description": "person not found",
-            "content": {
-              "application/json": {
-                "example": "could not update person"
-              }
-            }
+            "description": "Not Found"
           }
         }
       },
       "delete": {
-        "summary": "Delete a person.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
-          }
+        "tags": [
+          "Rental"
         ],
+        "summary": "Delete a rental store found by Id",
         "responses": {
           "204": {
-            "description": "successfully deleted"
+            "description": "No Content"
           },
           "400": {
-            "description": "Body Error",
-            "content": {
-              "application/json": {
-                "example": "Body error"
-              }
-            }
+            "description": "Bad Request"
           },
           "404": {
-            "description": "person not found",
-            "content": {
-              "application/json": {
-                "example": "could not delete person"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/authenticate": {
-      "post": {
-        "summary": "Authentic a record",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "type": "string"
-                  },
-                  "senha": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "_id": {
-                      "type": "string"
-                    },
-                    "nome": {
-                      "type": "string"
-                    },
-                    "cpf": {
-                      "type": "string"
-                    },
-                    "email": {
-                      "type": "string"
-                    },
-                    "habilitado": {
-                      "type": "string"
-                    },
-                    "token": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "registration not found",
-            "content": {
-              "application/json": {
-                "example": "registration not found"
-              }
-            }
+            "description": "Not Found"
           }
         }
       }
