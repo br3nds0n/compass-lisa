@@ -7,15 +7,15 @@ const UniqueEntryError = require('../error/UniqueEntryError');
 
 class CarController {
 	async create(req, res, next) {
+		const payload = req.body;
 		try {
-			const result = await CarService.create(req.body);
+			const result = await CarService.create(payload);
 			return res.status(201).json(result);
 		} catch (error) {
 			if (error instanceof UniqueEntryError) {
 				next(new BadRequest({ details: error.message }));
 			}
 			next(error);
-		
 		}
 	}
 

@@ -1,24 +1,37 @@
 const RentalRepository = require('../repository/RentalRepository');
 
+const EntityNotFound = require('../error/EntityNotFound');
+const UniqueEntryError = require('../error/UniqueEntryError');
+
 class RentalService {
 	async create(payload, data) {
-		
-		for (let i = 0; i < payload.endereco.length; i += 1) {
-			const ceps = payload.endereco;
-			const result = ceps[i];
-			const data = await RentalRepository.findViaCep(result.cep);
-			const { cep, logradouro, complemento, bairro, localidade, uf } = data;
-			result.cep = cep;
-			result.logradouro = logradouro;
-			result.complemento = complemento;
-			result.bairro = bairro;
-			result.localidade = localidade;
-			result.uf = uf;
+		try {
+			for (let i = 0; i < payload.endereco.length; i += 1) {
+				const ceps = payload.endereco;
+				const result = ceps[i];
+				const data = await RentalRepository.findViaCep(result.cep);
+				const { cep, logradouro, complemento, bairro, localidade, uf } = data;
+				result.cep = cep;
+				result.logradouro = logradouro;
+				result.complemento = complemento;
+				result.bairro = bairro;
+				result.localidade = localidade;
+				result.uf = uf;
+			}
+	
+			const result = await RentalRepository.create(payload, data);
+	
+			return result;
+		} catch (error) {
+			if (error.name === 'MongoServerError' && error.code === 11000) {
+				throw new UniqueEntryError(
+					'Locadoras',
+					Object.keys(error.keyPattern).map((key) => key)
+				);
+			} else {
+				throw error;
+			}
 		}
-
-		const result = await RentalRepository.create(payload, data);
-
-		return result;
 	}
 
 	async findAll (payload) {
@@ -30,11 +43,19 @@ class RentalService {
 	async delete (id) {
 		const result = await RentalRepository.delete(id);
 
+		if (result === null) {
+			throw new EntityNotFound(`Cannot find rental with ID = '${id}'`);
+		}
+
 		return result;
 	}
 
 	async update (id, payload) {
 		const result = await RentalRepository.update(id, payload);
+
+		if (result === null) {
+			throw new EntityNotFound(`Cannot find rental with ID = '${id}'`);
+		}
 
 		return result;
 	}
@@ -42,6 +63,10 @@ class RentalService {
 	async findById (id) {
 		const result = await RentalRepository.findById(id);
 
+		if (result === null) {
+			throw new EntityNotFound(`Cannot find rental with ID = '${id}'`);
+		}
+		
 		return result;
 	}
 }
