@@ -1,5 +1,4 @@
 const RentalService = require('../service/RentalService');
-const axios = require('axios');
 
 const BadRequest = require('../error/http/BadRequest');
 const EntityNotFound = require('../error/EntityNotFound');
@@ -10,16 +9,7 @@ class RentalController {
 	async create(req, res, next) {
 		const payload = req.body;
 		try {
-			const endereco = payload.endereco.find( element => element !== undefined );
-			const  { cep }  = endereco;
-			
-			const { data } = await axios.get(`https://viacep.com.br/ws/${cep}/json`);
-			const { logradouro , bairro, localidade, uf } = data;
-			
-			Object.assign(endereco, { logradouro : logradouro , bairro: bairro, localidade: localidade, uf: uf });
-
 			const result = await RentalService.create(payload);
-
 			return res.status(201).json(result);
 		} catch (error) {
 		 if(error instanceof UniqueEntryError){
