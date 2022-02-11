@@ -21,7 +21,7 @@ const schema = new Schema({
 	},
 	endereco: [
 		{
-			cep: { type: String, required: true },
+			cep: { type: String, unique: true, required: true },
 			number: { type: String, required: true },
 			complemento: { type: String, required: false },
 			isFilial: { type: Boolean, required: true },

@@ -26,13 +26,16 @@ module.exports = async (req, res, next) => {
 				.trim()
 				.required(),
 
-			endereco: Joi.array().items(
-				Joi.object({
-					cep: Joi.string().min(8).max(8).trim().required(),
-					number: Joi.string().trim().required(),
-					complemento: Joi.string().trim(),
-					isFilial: Joi.boolean().required()
-				}))
+			endereco: Joi.array()
+				.min(1)
+				.unique('cep')
+				.items(
+					Joi.object({
+						cep: Joi.string().min(8).max(8).trim().required(),
+						number: Joi.string().trim().required(),
+						complemento: Joi.string().trim(),
+						isFilial: Joi.boolean().required()
+					}))
 		});
 
 		const { error } = await schema.validate(req.body, {

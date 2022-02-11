@@ -14,7 +14,7 @@ class RentalRepository {
 	async findAll (payload) {
 		const myCustomLabels = {
 			totalDocs: 'total',
-			docs: 'Veiculos',
+			docs: 'Locadoras',
 			page: 'offset',
 			nextPage: false,
 			prevPage: false,
