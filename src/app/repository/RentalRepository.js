@@ -1,8 +1,14 @@
 const schema = require('../schema/rentalSchema');
+const axios = require('axios');
 
 class RentalRepository {
 	async create(payload, data) {
 		return await schema.create(payload, data);
+	}
+
+	async findViaCep(cep) {
+		const result = await axios.get(`https://viacep.com.br/ws/${cep}/json`);
+		return result.data;
 	}
 
 	async findAll (payload) {
