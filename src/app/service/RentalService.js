@@ -6,7 +6,7 @@ const UniqueEntryError = require('../error/UniqueEntryError');
 class RentalService {
 	async create(payload, data) {
 		try {
-			for (let i = 0; i < payload.endereco.length; i += 1) {
+			for (let i = 0; i < payload.endereco.length; i ++) {
 				const ceps = payload.endereco;
 				const result = ceps[i];
 				const data = await RentalRepository.findViaCep(result.cep);
