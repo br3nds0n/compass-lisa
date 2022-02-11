@@ -1,12 +1,14 @@
 const router = require('express').Router();
 
 const RentalController = require('../../../app/controller/RentalController');
+const validationId = require('../../../app/validation/validationId');
+const validationBodyRental = require('../../../app/validation/rental/validationBodyRental');
 
 router
-	.post('/rental', RentalController.create)
+	.post('/rental', validationBodyRental, RentalController.create)
 	.get('/rental', RentalController.findAll)
-	.get('/rental/:id', RentalController.getById)
-	.delete('/rental/:id', RentalController.delete)
-	.put('/rental/:id', RentalController.update);
+	.get('/rental/:id', validationId, RentalController.getById)
+	.delete('/rental/:id', validationId, RentalController.delete)
+	.put('/rental/:id', validationId, validationBodyRental, RentalController.update);
 
 module.exports = router;
