@@ -131,7 +131,7 @@ PORT=3000
 # Exemplo:
 DB_HOST=mongodb://localhost:27017/<name>
 ```
-> Você pode também acessar o [.env.exemple](./.env.exemple) e conferir o modelo.
+> Você pode também acessar o [.env.exemple](https://github.com/br3nds0n/compass-lisa/blob/dev/.env.example) e conferir o modelo.
 
 #
 
