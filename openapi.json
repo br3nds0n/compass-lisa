@@ -37,9 +37,21 @@
       "description": "Rentals Routes"
     }
   ],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
   "paths": {
     "/car": {
       "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": [
           "Vehicles"
         ],
@@ -128,6 +140,11 @@
         }
       },
       "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": [
           "Vehicles"
         ],
@@ -268,6 +285,11 @@
         }
       ],
       "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": [
           "Vehicles"
         ],
@@ -317,6 +339,11 @@
         }
       },
       "put": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": [
           "Vehicles"
         ],
@@ -408,6 +435,11 @@
         }
       },
       "delete": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": [
           "Vehicles"
         ],
@@ -445,6 +477,11 @@
         }
       ],
       "patch": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": [
           "Vehicles"
         ],
@@ -530,7 +567,7 @@
                   },
                   "cpf": {
                     "type": "string",
-                    "example": "712.559.734-39"
+                    "example": 71255973439
                   },
                   "data_nascimento": {
                     "type": "string",
@@ -1394,6 +1431,15 @@
             "description": "Not Found"
           }
         }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }

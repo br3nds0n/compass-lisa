@@ -21,9 +21,16 @@ tags:
     description: People Authentication
   - name: Rental
     description: Rentals Routes
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
 paths:
   /car:
     post:
+      security:
+        - bearerAuth: []
       tags:
         - Vehicles
       summary: Vehicle Register
@@ -81,6 +88,8 @@ paths:
         '400':
           description: Bad Request
     get:
+      security:
+        - bearerAuth: []
       tags:
         - Vehicles
       summary: Query all vehicles or by parameters
@@ -168,6 +177,8 @@ paths:
           type: string
         required: true
     get:
+      security:
+        - bearerAuth: []
       tags:
         - Vehicles
       summary: Search vehicle by ID
@@ -199,6 +210,8 @@ paths:
         '404':
           description: Not Found
     put:
+      security:
+        - bearerAuth: []
       tags:
         - Vehicles
       summary: Changes the properties of a vehicle found by Id
@@ -258,6 +271,8 @@ paths:
         '404':
           description: Not Found
     delete:
+      security:
+        - bearerAuth: []
       tags:
         - Vehicles
       summary: Delete a vehicle found by Id
@@ -281,6 +296,8 @@ paths:
           type: string
         required: true
     patch:
+      security:
+        - bearerAuth: []
       tags:
         - Vehicles
       summary: Changes the properties of the description found by the Id
@@ -338,7 +355,7 @@ paths:
                   example: Brendson Victor
                 cpf:
                   type: string
-                  example: 712.559.734-39
+                  example: 71255973439
                 data_nascimento:
                   type: string
                   format: date
@@ -890,3 +907,9 @@ paths:
           description: Bad Request
         '404':
           description: Not Found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
