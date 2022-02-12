@@ -1,4 +1,5 @@
 const RentalRepository = require('../repository/RentalRepository');
+const ViaCep = require('../api/ViaCep');
 
 const EntityNotFound = require('../error/EntityNotFound');
 const UniqueEntryError = require('../error/UniqueEntryError');
@@ -9,7 +10,7 @@ class RentalService {
 			for (let i = 0; i < payload.endereco.length; i ++) {
 				const ceps = payload.endereco;
 				const result = ceps[i];
-				const data = await RentalRepository.findViaCep(result.cep);
+				const data = await ViaCep.findViaCep(result.cep);
 				const { cep, logradouro, complemento, bairro, localidade, uf } = data;
 				result.cep = cep;
 				result.logradouro = logradouro;
