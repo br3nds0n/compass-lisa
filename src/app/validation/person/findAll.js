@@ -35,7 +35,10 @@ module.exports = async (req, res, next) => {
 		const { error } = await schema.validate(req.query, { abortEarl: true });
 		
 		if (error) {
-			throw new BadRequest({ details: error.details.map((err) => err.message) });
+			throw new BadRequest({ details:	error.details.map((detail) => ({
+				name: detail.path[0],
+				description: detail.message
+			})) });
 		}
 
 		next();

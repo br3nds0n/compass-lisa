@@ -14,7 +14,10 @@ module.exports = async (req, res, next) => {
 		if (error) throw error;
 
 		if (error) {
-			throw new BadRequest({ details: error.details.map((err) => err.message) });
+			throw new BadRequest({ details:	error.details.map((detail) => ({
+				name: detail.path[0],
+				description: detail.message
+			})) });
 		}
 
 		next();

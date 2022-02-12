@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const CarController = require('../../../app/controller/CarController');
+const tokenBearer = require('../../../app/middlewares/tokenBearer');
 
 const validationBodyCar = require('../../../app/validation/car/validationBodyCar');
 const validationFind = require('../../../app/validation/car/findAll');
