@@ -4,9 +4,9 @@ const EntityNotFound = require('../error/EntityNotFound');
 const UniqueEntryError = require('../error/UniqueEntryError');
 
 class CarService {
-	async create (car) {
+	async create (payload) {
 		try {
-			const result = await CarRepository.create(car);
+			const result = await CarRepository.create(payload);
 			return result;
 		} catch (error) {
 			if (error.name === 'MongoServerError' && error.code === 11000) {

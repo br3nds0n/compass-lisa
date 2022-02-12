@@ -1,8 +1,8 @@
 const schema = require('../schema/personSchema');
 
 class PersonRepository {
-	async create (person) {
-		return schema.create(person);
+	async create (payload) {
+		return schema.create(payload);
 	}
 
 	async findAll (payload) {

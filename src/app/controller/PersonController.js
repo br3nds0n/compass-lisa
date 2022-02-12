@@ -7,8 +7,9 @@ const UniqueEntryError = require('../error/UniqueEntryError');
 
 class PersonController {
 	async create (req, res, next) {
+		const payload = req.body;
 		try {
-			const result = await PersonService.create(req.body);
+			const result = await PersonService.create(payload);
 			return res.status(201).json(result);
 		} catch (error) {
 			if (error instanceof UniqueEntryError) {
