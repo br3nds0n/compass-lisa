@@ -14,7 +14,7 @@ class AuthService{
 		const { email, habilitado } = user;
 		const token = generateToken({ id: user.id });
 
-		const response = { email, habilitado, token};
+		const response = { email, habilitado, token };
 		return response;
 	}
 }

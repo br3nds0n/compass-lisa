@@ -41,11 +41,16 @@ class PersonService {
 		if (result === null) {
 			throw new EntityNotFound(`Cannot find customer with ID = '${id}'`);
 		}
+
 		return result;
 	}
 
 	async update (id, payload) {
 		const result = await PersonRepository.update(id, payload);
+
+		if (result === null) {
+			throw new EntityNotFound(`Cannot find customer with ID = '${id}'`);
+		}
 		
 		return result;
 	}
