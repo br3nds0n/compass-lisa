@@ -6,6 +6,9 @@ info:
   contact:
     name: Brendson Victor 
     email: brendson.net@gmail.com
+  license:
+    name: MIT License
+    url: https://github.com/br3nds0n/compass-lisa/blob/main/LICENSE
 externalDocs:
   description: Project Repository 
   url: https://github.com/br3nds0n/compass-lisa
