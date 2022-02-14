@@ -10,7 +10,8 @@ module.exports = async (req, res, next) => {
 				.max(24)
 		});
 
-		const { error } = await schema.validate(req.params, { abortEarl: true });
+		const { error } = await schema.validate(req.params, { abortEarly: true });
+		
 		if (error) throw error;
 
 		if (error) {

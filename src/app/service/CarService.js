@@ -31,6 +31,7 @@ class CarService {
 		if (result === null) {
 			throw new EntityNotFound(`Cannot find vehicle with ID = '${id}'`);
 		}
+		
 		return result;
 	}
 

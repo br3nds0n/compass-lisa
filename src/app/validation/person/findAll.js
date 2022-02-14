@@ -32,7 +32,7 @@ module.exports = async (req, res, next) => {
 			habilitado: Joi.string()
 		});
 
-		const { error } = await schema.validate(req.query, { abortEarl: true });
+		const { error } = await schema.validate(req.query, { abortEarly: true });
 		
 		if (error) {
 			throw new BadRequest({ details:	error.details.map((detail) => ({
