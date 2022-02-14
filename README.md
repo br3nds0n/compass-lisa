@@ -187,7 +187,7 @@ ___
 ## 🌐 Deploy 
 > Na fase de Deploy foi utilizada a ferramenta [Heroku](https://dashboard.heroku.com/), para fazer a hospedagem da nossa `API`.
 
-para ter acesso a Documentação da compass-lisa na Web. <br> Acesse: <a>https://compasso-lisa.herokuapp.com/api-docs/</a> 
+para ter acesso a Documentação da compass-lisa na Web. <br> Acesse: <a>https://compasso-lisa.herokuapp.com/api/v1/api-docs</a> 
 
 ---
 ## 🛠 Tecnologias
