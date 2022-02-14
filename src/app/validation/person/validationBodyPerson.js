@@ -18,8 +18,8 @@ module.exports = async (req, res, next) => {
 				.min(11)
 				.max(11)
 				.custom((value, help) => {
-					if (isCpf(value)) {
-						return help.message('Invalid cpf: enter a valid cpf');
+					if (!isCpf(value)) {
+						return help.message(`cpf '${value}' is invalid`);
 					}
 					return true;
 				}),
