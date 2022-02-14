@@ -3,7 +3,7 @@ class UniqueEntryError extends Error {
 		super('Unique entry error');
 
 		this.name = 'Unique Entry Error';
-		this.entrys = entrys.map(entry => `Entity ${entity} already exists with same ${entry}`);
+		this.body = `the '${entrys}' field is already registere`;
 	}
 }
 
