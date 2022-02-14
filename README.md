@@ -22,6 +22,7 @@ Vamos ao projeto! `#dreamBigger🚀💛`
      * [Iniciando a aplicação](#-iniciando-a-aplicação)
    * [🧪 Testando rotas](#-testando-rotas)
       * [documentação](#-Documentação) 
+   * [🌐 Deploy](#-deploy)
    * [🛠 Tecnologias](#-tecnologias)
    * [🏆 Agradecimentos](#-Agradecimentos)
    * [✍🏼 Autor](#-Autor)
@@ -164,9 +165,7 @@ $ npm run test
 > Resultado esperado:
 <img src="https://user-images.githubusercontent.com/82064724/152529344-dff51be3-ad25-4814-8ee8-8679710ac476.png">
 
-<br>
-
-## 📄 Documentação
+### 📄 Documentação
 > Para ter acesso a documentação, e também poder testar a `API` siga os passos:
 ```bash
 # Inicie a aplicação no vsCode
@@ -182,6 +181,13 @@ http://localhost:3000/api/v1/api-docs
 <br>
 
 [<Back](#indice)
+
+___
+
+## 🌐 Deploy 
+> Na fase de Deploy foi utilizada a ferramenta [Heroku](https://dashboard.heroku.com/), para fazer a hospedagem da nossa `API`.
+
+para ter acesso a Documentação da compass-lisa na Web. <br> Acesse: <a>https://compasso-lisa.herokuapp.com/api-docs/</a> 
 
 ---
 ## 🛠 Tecnologias
