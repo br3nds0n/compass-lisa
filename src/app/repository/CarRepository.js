@@ -1,8 +1,8 @@
 const schema = require('../schema/carSchema');
 
 class CarRepository {
-	async create (car) {
-		return schema.create(car);
+	async create (payload) {
+		return schema.create(payload);
 	}
 
 	async findAll (payload) {
@@ -37,6 +37,13 @@ class CarRepository {
 	async update (id, payload) {
 		return schema.findByIdAndUpdate(id, payload, { new: true });
 	}
-}
 
+	async updateAccessory(id, acessorioId, payload) {
+		return schema.findByIdAndUpdate(
+			id, 
+			{ $set: {'acessorios.$[outer].descricao': payload.descricao} },
+			{ arrayFilters: [{'outer._id': acessorioId }] }
+		);
+	}
+}
 module.exports = new CarRepository();

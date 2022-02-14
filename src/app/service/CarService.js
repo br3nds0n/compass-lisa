@@ -1,12 +1,12 @@
 const CarRepository = require('../repository/CarRepository');
 
-const EntityNotFound = require('../error/errors/EntityNotFound');
-const UniqueEntryError = require('../error/errors/UniqueEntryError');
+const EntityNotFound = require('../error/EntityNotFound');
+const UniqueEntryError = require('../error/UniqueEntryError');
 
 class CarService {
-	async create (car) {
+	async create (payload) {
 		try {
-			const result = await CarRepository.create(car);
+			const result = await CarRepository.create(payload);
 			return result;
 		} catch (error) {
 			if (error.name === 'MongoServerError' && error.code === 11000) {
@@ -31,6 +31,7 @@ class CarService {
 		if (result === null) {
 			throw new EntityNotFound(`Cannot find vehicle with ID = '${id}'`);
 		}
+		
 		return result;
 	}
 
@@ -46,6 +47,16 @@ class CarService {
 	async update (id, payload) {
 		const result = await CarRepository.update(id, payload);
 
+		if (result === null) {
+			throw new EntityNotFound(`Cannot find vehicle with ID = '${id}'`);
+		}
+		
+		return result;
+	}
+
+	async updateAccessory (id, acessorioId, payload) {
+		const result = await CarRepository.updateAccessory(id, acessorioId, payload);
+	
 		return result;
 	}
 }

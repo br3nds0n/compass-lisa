@@ -1,8 +1,7 @@
 # CompassoLisa Dealership <img align="right" src="https://img.shields.io/static/v1?label=project&message=Compass&color=F0FD71&style=for-the-badge&logo=ghost"/>
 <p align="center">
-<img height="250" width="850" src="https://user-images.githubusercontent.com/82064724/150918098-41ff1343-8996-429c-92e3-9f13eedbc632.gif">
+<img height="250" width="850" src="https://user-images.githubusercontent.com/82064724/153628847-2b2003e9-1567-482b-a069-b8c2e7d4f4f7.gif">
 </p>
-
 
 Bem-vindo(a). Ao desafio Final!
 
@@ -22,9 +21,8 @@ Vamos ao projeto! `#dreamBigger🚀💛`
      * [Setup da aplicação](#-setup-da-aplicação)
      * [Iniciando a aplicação](#-iniciando-a-aplicação)
    * [🧪 Testando rotas](#-testando-rotas)
-      * [Car](#-car-1) 
-      * [People](#-people-1)
-      * [Authenticate](#-authenticate-1)
+      * [documentação](#-Documentação) 
+   * [🌐 Deploy](#-deploy)
    * [🛠 Tecnologias](#-tecnologias)
    * [🏆 Agradecimentos](#-Agradecimentos)
    * [✍🏼 Autor](#-Autor)
@@ -48,35 +46,49 @@ Nesta parte 01 do [desafio](https://github.com/br3nds0n/reademefinal/files/79392
  ### 🚐 Car
 > Rota: `http://localhost:<PORT>/api/v1/car`
 
-| Id        | Request                                        | Endpoint                 |
-|-----------| -----------------------------------------------| -------------------------|
-|1          |  [POST](#post-httplocalhost3000apiv1car)       | cadastrar um carro       |
-|2          |  [GET](#get-httplocalhost3000apiv1car)         | listar todos carros      |
-|3          |  [DELETE](#delete-httplocalhost3000apiv1carid) | remover um carro         |
-|4          |  [PUT](#put-httplocalhost3000apiv1carid)       | atualiza carro cadastrado|
-|5          |  [GET/:id](#getid--httplocalhost3000apiv1carid)| buscar um carro          |
+| Id        | Request                    | Endpoint                 |
+|-----------| ---------------------------|--------------------------|
+|1          |  `POST`                    | cadastrar um carro       |
+|2          |  `GET`                     | listar todos carros      |
+|3          |  `DELETE`                  | remover um carro         |
+|4          |  `PUT`                     | atualiza carro cadastrado|
+|5          |  `GET/:id`                 | buscar um carro          |
+|6          |  `PATCH/:id/acessorios/:id`| buscar um carro          |
 
 #
 
 ### 👤 People
 > Rota: `http://localhost:<PORT>/api/v1/people`
  
-| Id        | Request                                          | Endpoint                 |
-|---------- | -------------------------------------------------| -------------------------|
-|1          | [POST](#post-httplocalhost3000apiv1people)       | cadastrar uma pessoa     |
-|2          | [GET](#get-httplocalhost3000apiv1people)         | listar todas as pessoas  |
-|3          | [DELETE](#delete-httplocalhost3000apiv1peopleid) | remover uma pessoa       |
-|4          | [PUT](#put-httplocalhost3000apiv1peopleid)       | atualiza uma pessoa      |
-|5          | [GET/:id](#getid--httplocalhost3000apiv1peopleid)| buscar uma pessoa        |
+| Id        | Request    | Endpoint                 |
+|-----------| -----------| -------------------------|
+|1          | `POST`     | cadastrar uma pessoa     |
+|2          | `GET`      | listar todas as pessoas  |
+|3          | `DELETE`   | remover uma pessoa       |
+|4          | `PUT`      | atualiza uma pessoa      |
+|5          | `GET/:id`  | buscar uma pessoa        |
 
 #
 
 ### 🔐 Authenticate
 > Rota: `http://localhost:<PORT>/api/v1/authenticate`
 
-| Id             | Request                                          | Endpoint                          |
-|--------------- | ------------------------------------------------ | ----------------------------------|
-|1               | [POST](#post-httplocalhost3000apiv1authenticate) | Atutenticar Cadastro de people    |
+| Id             | Request   | Endpoint                          |
+|--------------- | --------- | ----------------------------------|
+|1               | `POST`    | Atutenticar Cadastro de people    |
+
+#
+
+ ### 🏪 Rental
+> Rota: `http://localhost:<PORT>/api/v1/rental`
+ 
+| Id        | Request   | Endpoint                      |
+|-----------| ----------| ------------------------------|
+|1          |  `POST`   | cadastrar uma locadora        |
+|2          |  `GET`    | listar todas locadoras        |
+|3          |  `DELETE` | remover uma locadora          |
+|4          |  `PUT`    | atualizar locadora cadastrada |
+|5          |  `GET/:id`| buscar uma locadora           |
 
 <br>
 
@@ -120,6 +132,7 @@ PORT=3000
 # Exemplo:
 DB_HOST=mongodb://localhost:27017/<name>
 ```
+> Você pode também acessar o [.env.exemple](https://github.com/br3nds0n/compass-lisa/blob/dev/.env.example) e conferir o modelo.
 
 #
 
@@ -146,283 +159,35 @@ $ npm run dev
 ```bash
 # Use o script de tests
 $ npm run test
+
+# Será rodado os testes de feature no terminal
 ```
 > Resultado esperado:
 <img src="https://user-images.githubusercontent.com/82064724/152529344-dff51be3-ad25-4814-8ee8-8679710ac476.png">
 
-<br>
+### 📄 Documentação
+> Para ter acesso a documentação, e também poder testar a `API` siga os passos:
+```bash
+# Inicie a aplicação no vsCode
+$ npm run start
 
- ### 🚐 Car
-> <h4><b>POST:</b> <code>http://localhost:3000/api/v1/car</code></h4> 
+# Em seguida abra seu browser pesquise
+http://localhost:3000/api/v1/api-docs
 
-<img height="420" width="850" src="https://user-images.githubusercontent.com/82064724/152077188-f4a4a458-a783-451c-971d-a8d4e7e351f8.gif">
-
-> <h4>🚧 Possíveis erros -> status: 400 <i>Bad Request</i> 🚧</h4>
-
-```json
-{
-    "message": "Bad Request",
-    "details": [
-        "\"modelo\" is not allowed to be empty",
-        "\"cor\" is not allowed to be empty",
-        "\"ano\" must be in YYYY format",
-        "\"acessorios[0].descricao\" is not allowed to be empty",
-        "\"quantidadePassageiros\" must be a number"
-    ]
-}
+# Terá acesso a documentação da API
 ```
+<img height="620" width="850" src="https://user-images.githubusercontent.com/82064724/153685288-0b72fc6f-3d9e-4def-9225-7535ff65681d.gif">
 
-<br>
-
-[<Back](#-car)
-
-<br>
-
-> <h4><b>GET:</b> <code>http://localhost:3000/api/v1/car</code></h4> 
-
-<img height="420" width="850" src="https://user-images.githubusercontent.com/82064724/152077409-dae2aad8-5295-4ba7-8d1a-4ca68fc8222e.gif">
-
-> <h4>🚧 Possíveis erros -> status: 400 <i>Bad Request</i> 🚧</h4>
-
-```json
-{
-   "message": "Bad Request"
-}
-```
-
-<br>
-
-[<Back](#-car)
-
-<br>
-
-> <h4><b>DELETE:</b> <code>http://localhost:3000/api/v1/car/:id</code></h4> 
-
-<img height="420" width="850" src="https://user-images.githubusercontent.com/82064724/152078508-a53b2bf1-4a47-4f12-90a7-dfbe3c4f28d4.gif">
-
-> <h4>🚧 Possíveis erros -> status: 404 <i>Not Found</i>🚧</h4>
-
-```json
-{
-    {
-    "message": "Not Found",
-    "details": [
-        "Cannot find vehicle with ID = '' "
-    ]
-}
-}
-```
-<br>
-
-[<Back](#-car)
-
-<br>
-
-> <h4><b>PUT:</b> <code>http://localhost:3000/api/v1/car/:id</code></h4> 
-
-<img height="420" width="850" src="https://user-images.githubusercontent.com/82064724/152077724-7a54a0aa-e15b-45d1-9ded-cf113419db03.gif">
-
-> <h4>🚧 Possíveis erros -> status: 400 <i>Bad Request</i> or 404 <i>Not Found</i>🚧</h4>
-
-```json
-{   
-    {
-    "message": "Bad Request",
-    "details": [
-        "\"modelo\" is not allowed to be empty",
-        "\"cor\" is not allowed to be empty",
-        "\"ano\" must be in YYYY format",
-        "\"acessorios[0].descricao\" is not allowed to be empty",
-        "\"quantidadePassageiros\" must be a number"
-    ]
-}
-
-    {
-    "message": "Not Found",
-    "details": [
-        "Cannot find vehicle with ID = '' "
-    ]
-}
-}
-```
-<br>
-
-[<Back](#-car)
-
-<br>
-
-> <h4><b>GET/:id :</b> <code>http://localhost:3000/api/v1/car/:id</code></h4> 
-
-<img height="420" width="850" src="https://user-images.githubusercontent.com/82064724/152078027-e18c4db4-18db-4e06-9117-6ab9c6e76d6e.gif">
-
-> <h4>🚧 Possíveis erros -> status: 404 <i>Not Found</i> 🚧</h4>
-
-```json
-{
-    {
-    "message": "Not Found",
-    "details": [
-        "Cannot find vehicle with ID = '' "
-    ]
-}
-}
-```
-
-<br>
-
-[<Back](#-car)
-
-#
-
-### 👤 People
-> <h4><b>POST:</b> <code>http://localhost:3000/api/v1/people</code></h4> 
-
-<img height="420" width="850" src="https://user-images.githubusercontent.com/82064724/152034260-91b7b2a0-baad-4f3d-b05f-8a959cecbcf5.gif">
-
-> <h4>🚧 Possíveis erros -> status: 400 <i>Bad Request</i> 🚧</h4>
-
-```json
-{
-    "message": "Bad Request",
-    "details": [
-        "\"nome\" is not allowed to be empty",
-        "\"cpf\" is not allowed to be empty",
-        "\"data_nascimento\" must be in DD/MM/YYYY format",
-        "\"email\" is not allowed to be empty",
-        "\"senha\" is not allowed to be empty",
-        "\"habilitado\" must be one of [não, sim]",
-        "\"habilitado\" is not allowed to be empty"
-    ]
-}
-```
-<br>
-
-[<Back](#-people)
-
-<br>
-
-> <h4><b>GET:</b> <code>http://localhost:3000/api/v1/people</code></h4> 
-
-<img height="420" width="850" src="https://user-images.githubusercontent.com/82064724/152060833-57d74ec2-4642-41f5-ab2e-ab7034e46760.gif">
-
-
-> <h4>🚧 Possíveis erros -> status: 400 <i>Bad Request</i> 🚧</h4>
-
-```json
-{
-   "message": "Bad Request"
-}
-```
-
-<br>
-
-[<Back](#-people)
-
-<br>
-
-> <h4><b>DELETE:</b> <code>http://localhost:3000/api/v1/people/:id</code></h4> 
-
-<img height="420" width="850" src="https://user-images.githubusercontent.com/82064724/152075784-8afea29c-dcc6-49db-9eab-10fc3abd5e47.gif">
-
-
-> <h4>🚧 Possíveis erros -> status: 404 <i>Not Found</i> 🚧</h4>
-
-```json
-{
-    {
-    "message": "Not Found",
-    "details": [
-        "Cannot find customer with ID = '' "
-    ]
-}
-}
-```
-
-<br>
-
-[<Back](#-people)
-
-<br>
-
-> <h4><b>PUT:</b> <code>http://localhost:3000/api/v1/people/:id</code></h4> 
-
-<img height="420" width="850" src="https://user-images.githubusercontent.com/82064724/152074814-0d360db6-d9d9-433b-b91d-0bd9a3e6e75e.gif">
-
-> <h4>🚧 Possíveis erros -> status: 400 <i>Bad Request</i> or 404 <i>Not Found</i>🚧</h4>
-
-```json
-{   
-    {
-    "message": "Bad Request",
-    "details": [
-        "\"nome\" is not allowed to be empty",
-        "\"cpf\" is not allowed to be empty",
-        "\"data_nascimento\" must be in DD/MM/YYYY format",
-        "\"email\" is not allowed to be empty",
-        "\"senha\" is not allowed to be empty",
-        "\"habilitado\" must be one of [não, sim]",
-        "\"habilitado\" is not allowed to be empty"
-    ]
-}
-
-    {
-    "message": "Not Found",
-    "details": [
-        "Cannot find customer with ID = '' "
-    ]
-}
-}
-```
-
-<br>
-
-[<Back](#-people)
-
-<br>
-
-> <h4><b>GET/:id :</b> <code>http://localhost:3000/api/v1/people/:id</code></h4> 
-
-<img height="420" width="850" src="https://user-images.githubusercontent.com/82064724/152062445-f766f114-9994-4cc6-bdb7-0b2cc684a425.gif">
-
-> <h4>🚧 Possíveis erros -> status: 404 <i>Not Found</i> 🚧</h4>
-
-```json
-{
-    {
-    "message": "Not Found",
-    "details": [
-        "Cannot find customer with ID = '' "
-    ]
-}
-}
-```
-
-<br>
-
-[<Back](#-people)
-
-#
-
-### 🔐 Authenticate
-> <h4><b>POST:</b> <code>http://localhost:3000/api/v1/authenticate</code></h4> 
-
-<img height="420" width="850" src="https://user-images.githubusercontent.com/82064724/152051256-1a5cc4ab-09b9-4c82-be5d-3680e72103f1.gif">
-
-> <h4>🚧 Possíveis erros -> status: 400 <i>Bad Request</i> 🚧</h4>
-
-```json
-{
-    "message": "Bad Request",
-    "details": [
-        "\"email\" must be a valid email",
-        "\"senha\" length must be at least 6 characters long",
-        "\"senha\" Invalid password"
-    ]
-}
-```
 <br>
 
 [<Back](#indice)
+
+___
+
+## 🌐 Deploy 
+> Na fase de Deploy foi utilizada a ferramenta [Heroku](https://dashboard.heroku.com/), para fazer a hospedagem da nossa `API`.
+
+para ter acesso a Documentação da compass-lisa na Web. <br> Acesse: <a>https://compasso-lisa.herokuapp.com/api-docs/</a> 
 
 ---
 ## 🛠 Tecnologias
@@ -436,6 +201,11 @@ As seguintes ferramentas/tecnologias foram usadas na construção e testagem do 
 | <a href="https://www.postman.com/downloads/" target="_blank"><img align="center" alt="postman" height="30" width="30" src="https://user-images.githubusercontent.com/82064724/147416090-89b4e7a3-2b78-417a-a154-f47940d23e38.png">            | Postman                    |  `9.6.2`       |
 | <a href="https://code.visualstudio.com/download" target="_blank"><img align="center" alt="VsCode" height="25" width="35" src="https://github.com/devicons/devicon/blob/master/icons/vscode/vscode-original.svg"></a> | VsCode | `1.63.2` |
 
+ 
+ <br>
+
+[<Back](#indice)
+ 
 ---
 
 ## **🏆 Agradecimentos**
@@ -532,6 +302,6 @@ Esse repositório está licenciado pela **MIT LICENSE**. Para mais informações
 
 ## 🎁 Bonus
 
- #### [Felipe](https://www.linkedin.com/in/felps03/), [Bruna](https://www.linkedin.com/in/brunasantos14/) e [Giovanni](https://www.linkedin.com/in/giovanni-hoffmann-rodrigues-9253266a/) depois desse projeto: 
+ #### Os [instrutores](#-Agradecimentos) depois desse projeto: 
  
   <img width="900" height="300" src="https://pm1.narvii.com/6359/1ec89eddc009439df6ac56cd7890f1e08e680fb6_hq.jpg">

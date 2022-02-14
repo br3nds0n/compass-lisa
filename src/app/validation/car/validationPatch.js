@@ -1,28 +1,18 @@
-const Joi = require('joi');
-const ENUM = require('../../helper/utils/enum');
+const Joi = require('joi').extend(require('@joi/date'));
 
 const BadRequest = require('../../error/http/BadRequest');
 
 module.exports = async (req, res, next) => {
 	try {
 		const schema = Joi.object({
-			email: Joi.string()
+			descricao: Joi.string()
 				.trim()
-				.email({
-					minDomainSegments: 2,
-					tlds: { allow: ENUM.email },
-				})
-				.required(),
-
-			senha: Joi.string()
-				.trim()
-				.min(6)
-				.required(),
+				.required()
 		});
 
 		const { error } = await schema.validate(req.body, {
 			abortEarly: false,
-			allowUnknown: false,
+			allowUnknown: false
 		});
 
 		if (error) {

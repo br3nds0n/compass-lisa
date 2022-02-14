@@ -1,8 +1,8 @@
 const supertest = require('supertest');
 const mongoose = require('mongoose');
 
-const App = require('../src/app');
-const carService = require('../src/app/service/carService');
+const App = require('../database/index');
+const carService = require('../../src/app/service/carService');
 
 const car = {};
 
@@ -66,7 +66,7 @@ describe('Test-Feature-Car', () => {
 				ano: '2021',
 				acessorios: [
 					{ descricao: 'Ar-condicionado' },
-					{ descricao: 'Dir. Hidráulica' },
+					{ descricao: 'Dir.Hidráulica' },
 				],
 				quantidadePassageiros: 5
 			});

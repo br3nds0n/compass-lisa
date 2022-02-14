@@ -1,10 +1,10 @@
 const Joi = require('joi').extend(require('@joi/date'));
 
-const isCpf = require('../../helper/isCpf');
-const isYear18 = require('../../helper/isYear18');
-const ENUM = require('../../helper/enum');
+const isCpf = require('../../helper/functions/isCpf');
+const isYear18 = require('../../helper/functions/isYear18');
+const ENUM = require('../../helper/utils/enum');
 
-const BadRequest = require('../../error/errors/BadRequest');
+const BadRequest = require('../../error/http/BadRequest');
 
 module.exports = async (req, res, next) => {
 	try {
@@ -18,8 +18,8 @@ module.exports = async (req, res, next) => {
 				.min(11)
 				.max(11)
 				.custom((value, help) => {
-					if (isCpf(value)) {
-						return help.message('Invalid cpf: enter a valid cpf');
+					if (!isCpf(value)) {
+						return help.message(`cpf '${value}' is invalid`);
 					}
 					return true;
 				}),
@@ -62,7 +62,10 @@ module.exports = async (req, res, next) => {
 		});
 
 		if (error) {
-			throw new BadRequest({ details: error.details.map((err) => err.message) });
+			throw new BadRequest({ details:	error.details.map((detail) => ({
+				name: detail.path[0],
+				description: detail.message
+			})) });
 		}
 
 		next();

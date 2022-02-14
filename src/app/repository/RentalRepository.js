@@ -1,14 +1,14 @@
-const schema = require('../schema/personSchema');
+const schema = require('../schema/rentalSchema');
 
-class PersonRepository {
-	async create (person) {
-		return schema.create(person);
+class RentalRepository {
+	async create(payload, data) {
+		return await schema.create(payload, data);
 	}
 
 	async findAll (payload) {
 		const myCustomLabels = {
 			totalDocs: 'total',
-			docs: 'Pessoas',
+			docs: 'Locadoras',
 			page: 'offset',
 			nextPage: false,
 			prevPage: false,
@@ -26,10 +26,6 @@ class PersonRepository {
 		return schema.paginate(payload, options, {});
 	}
 
-	async findById (id) {
-		return schema.findById(id);
-	}
-
 	async delete (id) {
 		return schema.findByIdAndDelete(id);
 	}
@@ -37,6 +33,10 @@ class PersonRepository {
 	async update (id, payload) {
 		return schema.findByIdAndUpdate(id, payload, { new: true });
 	}
+
+	async findById (id) {
+		return schema.findById(id);
+	}
 }
 
-module.exports = new PersonRepository();
+module.exports = new RentalRepository();

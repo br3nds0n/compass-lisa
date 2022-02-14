@@ -1,12 +1,12 @@
 const PersonRepository = require('../repository/PersonRepository');
 
-const EntityNotFound = require('../error/errors/EntityNotFound');
-const UniqueEntryError = require('../error/errors/UniqueEntryError');
+const EntityNotFound = require('../error/EntityNotFound');
+const UniqueEntryError = require('../error/UniqueEntryError');
 
 class PersonService {
-	async create (person) {
+	async create (payload) {
 		try {
-			const result = await PersonRepository.create(person);
+			const result = await PersonRepository.create(payload);
 			return result;
 		} catch (error) {
 			if (error.name === 'MongoServerError' && error.code === 11000) {
@@ -41,11 +41,17 @@ class PersonService {
 		if (result === null) {
 			throw new EntityNotFound(`Cannot find customer with ID = '${id}'`);
 		}
+
 		return result;
 	}
 
 	async update (id, payload) {
 		const result = await PersonRepository.update(id, payload);
+
+		if (result === null) {
+			throw new EntityNotFound(`Cannot find customer with ID = '${id}'`);
+		}
+		
 		return result;
 	}
 }

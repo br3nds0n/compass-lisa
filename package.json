@@ -5,9 +5,9 @@
   "main": "./src/server.js",
   "scripts": {
     "start": "node ./src/server.js",
-    "dev": "nodemon ./src/server.js --ignore tests",
+    "dev": "nodemon ./src/server.js --ignore __tests__",
     "lint": "eslint . --fix",
-    "test": "jest"
+    "test": "jest --coverage --coverageReporters"
   },
   "repository": {
     "type": "git",
@@ -26,14 +26,17 @@
   "homepage": "https://github.com/br3nds0n/compass-lisa#readme",
   "dependencies": {
     "@joi/date": "^2.1.0",
+    "axios": "^0.25.0",
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "dotenv": "^14.2.0",
     "eslint-config-prettier": "^8.3.0",
     "express": "^4.17.2",
     "joi": "^17.5.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.7",
-    "mongoose-paginate-v2": "^1.5.0"
+    "mongoose-paginate-v2": "^1.5.0",
+    "swagger-ui-express": "^4.3.0"
   },
   "devDependencies": {
     "eslint": "^8.8.0",

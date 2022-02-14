@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
 const bcrypt = require('bcryptjs');
-const ENUM = require('../helper/enum');
+const ENUM = require('../helper/utils/enum');
 
 const { Schema } = mongoose;
 
@@ -30,7 +30,6 @@ const schema = new Schema({
 		type: String,
 		minLength: 6,
 		required: true,
-		select: false
 	},
 	habilitado: {
 		type: String,

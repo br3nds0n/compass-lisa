@@ -1,26 +1,28 @@
-const PersonService = require('../service/PersonService');
+const RentalService = require('../service/RentalService');
 
-const BadRequest = require('../error/errors/BadRequest');
-const EntityNotFound = require('../error/errors/EntityNotFound');
-const NotFound = require('../error/errors/NotFound');
-const UniqueEntryError = require('../error/errors/UniqueEntryError');
+const BadRequest = require('../error/http/BadRequest');
+const EntityNotFound = require('../error/EntityNotFound');
+const NotFound = require('../error/http/NotFound');
+const UniqueEntryError = require('../error/UniqueEntryError');
 
-class PersonController {
-	async create (req, res, next) {
+class RentalController {
+	async create(req, res, next) {
+		const payload = req.body;
 		try {
-			const result = await PersonService.create(req.body);
+			const result = await RentalService.create(payload);
 			return res.status(201).json(result);
 		} catch (error) {
-			if (error instanceof UniqueEntryError) {
+		 if(error instanceof UniqueEntryError){
 				next(new BadRequest({ details: error.message }));
-			}
+		 }
+		 next(error);
 		}
 	}
 
-	async findAll (req, res, next) {
+	async findAll(req, res, next) {
 		const payload = req.query;
 		try {
-			const result = await PersonService.findAll(payload);
+			const result = await RentalService.findAll(payload);
 			return res.status(200).json(result);
 		} catch (error) {
 			next(error);
@@ -30,7 +32,7 @@ class PersonController {
 	async delete (req, res, next) {
 		const { id } = req.params;
 		try {
-			await PersonService.delete(id);
+			await RentalService.delete(id);
 			return res.status(204).end();
 		} catch (error) {
 			if (error instanceof EntityNotFound) {
@@ -45,7 +47,7 @@ class PersonController {
 		const { id } = req.params;
 		const newPerson = req.body;
 		try {
-			const result = await PersonService.update(id, newPerson);
+			const result = await RentalService.update(id, newPerson);
 			return res.status(200).json(result);
 		} catch (error) {
 			if (error instanceof EntityNotFound) {
@@ -58,7 +60,7 @@ class PersonController {
 	async getById (req, res, next) {
 		const { id } = req.params;
 		try {
-			const result = await PersonService.findById(id);
+			const result = await RentalService.findById(id);
 			return res.status(200).json(result);
 		} catch (error) {
 			if (error instanceof EntityNotFound) {
@@ -69,4 +71,4 @@ class PersonController {
 	}
 }
 
-module.exports = new PersonController();
+module.exports = new RentalController();

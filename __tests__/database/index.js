@@ -1,17 +1,13 @@
 const express = require('express');
 
-const routes = require('./routes');
-require('./infra/database/mongo');
-
-const cors = require('cors');
-const erroModify = require('./app/middlewares/erroModify');
+const routes = require('../../src/routes');
+require('./connection');
 
 class App {
 	constructor() {
 		this.server = express();
 		this.middlewares();
 		this.routes();
-		this.erroModify();
 	}
 
 	routes() {
@@ -20,14 +16,9 @@ class App {
 
 	middlewares() {
 		this.server.use(express.urlencoded({ extended: true }));
-		this.server.use(cors());
 		this.server.use(express.json());
 	}
 
-	erroModify() {
-		this.server.use(erroModify);
-		
-	}
 }
 
 module.exports = new App().server;
