@@ -456,7 +456,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  veiculos:
+                  Pessoas:
                     type: array
                     items:
                       type: object
