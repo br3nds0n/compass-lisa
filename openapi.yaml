@@ -14,7 +14,9 @@ externalDocs:
   url: https://github.com/br3nds0n/compass-lisa
 servers:
   - url: http://localhost:3000/api/v1
-    description: Server
+    description: Local server
+  - url: https://compasso-lisa.herokuapp.com/api/v1
+    description: Heroku server
 tags:
   - name: Vehicles
     description: Vehicle Routes
@@ -624,7 +626,7 @@ paths:
                   example: CompassoLisa
                 cnpj:
                   type: string
-                  example: 07654824000124
+                  example: 97336814000133
                 atividades:
                   type: string
                   example: Aluga Veiculos
