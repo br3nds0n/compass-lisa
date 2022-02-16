@@ -1,6 +1,7 @@
 const RentalRepository = require('../repository/RentalRepository');
 const ViaCep = require('../api/ViaCep');
 
+const ConflictError = require('../error/ConflictError');
 const NotFound = require('../error/http/NotFound');
 const ConflicUtils = require('../helper/utils/ConflicUtils');
 
@@ -25,7 +26,7 @@ class RentalService {
       const result = await RentalRepository.create(payload, data);
       return result;
     } catch (error) {
-      return error.message;
+      if (error.name === 'MongoServerError' && error.code === 11000) throw new ConflictError('cep');
     }
   }
 
