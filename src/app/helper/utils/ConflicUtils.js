@@ -3,6 +3,12 @@ const rentalSchema = require('../../schema/rentalSchema');
 const ConflicError = require('../../error/ConflictError');
 
 class ConflicUtils {
+  async ConflicEmail(email) {
+    const getEmail = await personSchema.find({ email });
+
+    if (getEmail.length > 0) throw new ConflicError(email);
+  }
+
   async ConflicCpf(cpf) {
     const getCpf = await personSchema.find({ cpf });
 

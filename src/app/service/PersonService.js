@@ -6,6 +6,7 @@ const ConflicUtils = require('../helper/utils/ConflicUtils');
 class PersonService {
   async create(payload) {
     await ConflicUtils.ConflicCpf(payload.cpf);
+    await ConflicUtils.ConflicEmail(payload.email);
 
     const result = await PersonRepository.create(payload);
     return result;
