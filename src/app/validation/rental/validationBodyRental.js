@@ -13,7 +13,7 @@ module.exports = async (req, res, next) => {
         .min(14)
         .max(14)
         .custom((value, help) => {
-          if (!isCnpj(value)) {
+          if (isCnpj(value)) {
             return help.message('Invalid cnpj: enter a valid cnpj');
           }
           return true;

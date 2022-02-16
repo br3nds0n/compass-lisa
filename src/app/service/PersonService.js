@@ -1,12 +1,11 @@
 const PersonRepository = require('../repository/PersonRepository');
 
 const NotFound = require('../error/http/NotFound');
-
-const DuplicateDataUtils = require('../helper/utils/DuplicateDataUtils');
+const ConflicUtils = require('../helper/utils/ConflicUtils');
 
 class PersonService {
   async create(payload) {
-    await DuplicateDataUtils.duplicatedCpf(payload.cpf);
+    await ConflicUtils.ConflicCpf(payload.cpf);
 
     const result = await PersonRepository.create(payload);
     return result;

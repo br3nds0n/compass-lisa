@@ -2,11 +2,12 @@ const RentalRepository = require('../repository/RentalRepository');
 const ViaCep = require('../api/ViaCep');
 
 const NotFound = require('../error/http/NotFound');
-const ConflictError = require('../error/ConflictError');
+const ConflicUtils = require('../helper/utils/ConflicUtils');
 
 class RentalService {
   async create(payload, data) {
-    try {
+    await ConflicUtils.ConflicCnpj(payload.cnpj);
+
       for (let i = 0; i < payload.endereco.length; i++) {
         const ceps = payload.endereco;
         const result = ceps[i];
@@ -23,16 +24,6 @@ class RentalService {
       const result = await RentalRepository.create(payload, data);
 
       return result;
-    } catch (error) {
-      if (error.name === 'MongoServerError' && error.code === 11000) {
-        throw new ConflictError(
-          'Locadoras',
-          Object.keys(error.keyPattern).map((key) => key)
-        );
-      } else {
-        throw error;
-      }
-    }
   }
 
   async findAll(payload) {
@@ -44,9 +35,7 @@ class RentalService {
   async delete(id) {
     const result = await RentalRepository.delete(id);
 
-    if (result === null) {
-      throw new NotFound(`Cannot find rental with ID = '${id}'`);
-    }
+    if (result == null) throw new NotFound(id);
 
     return result;
   }
@@ -54,9 +43,7 @@ class RentalService {
   async update(id, payload) {
     const result = await RentalRepository.update(id, payload);
 
-    if (result === null) {
-      throw new NotFound(`Cannot find rental with ID = '${id}'`);
-    }
+    if (result == null) throw new NotFound(id);
 
     return result;
   }
@@ -64,9 +51,7 @@ class RentalService {
   async findById(id) {
     const result = await RentalRepository.findById(id);
 
-    if (result === null) {
-      throw new NotFound(`Cannot find rental with ID = '${id}'`);
-    }
+    if (result == null) throw new NotFound(id);
 
     return result;
   }
