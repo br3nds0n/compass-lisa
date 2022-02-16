@@ -8,10 +8,10 @@ module.exports = async (req, res, next) => {
       id: Joi.string().min(24).max(24),
       modelo: Joi.string(),
       cor: Joi.string(),
-      ano: Joi.number().integer().min(1950).max(2022).required(),
+      ano: Joi.number().integer().min(1950).max(2022),
       acessorios: Joi.array().items(
         Joi.object({
-          descricao: Joi.string().required()
+          descricao: Joi.string()
         })
       ),
       quantidadePassageiros: Joi.number().integer(),

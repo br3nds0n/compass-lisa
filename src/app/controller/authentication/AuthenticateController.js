@@ -7,7 +7,10 @@ class AuthenticateController {
       const result = await AuthService.findAuth(payload);
       return res.status(200).json(result);
     } catch (error) {
-      next(error);
+      return res.status(error.statusCode).json({
+        description: error.description,
+        name: error.message
+      });
     }
   }
 }

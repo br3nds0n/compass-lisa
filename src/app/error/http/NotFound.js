@@ -6,7 +6,7 @@ class NotFound extends HttpError {
 
     this.statusCode = 404;
     this.description = 'Not Found';
-    this.message = `id: ${payload} was not found`;
+    this.message = `${payload} was not found`;
   }
 }
 

@@ -8,22 +8,22 @@ class RentalService {
   async create(payload, data) {
     await ConflicUtils.ConflicCnpj(payload.cnpj);
 
-      for (let i = 0; i < payload.endereco.length; i++) {
-        const ceps = payload.endereco;
-        const result = ceps[i];
-        const data = await ViaCep.findViaCep(result.cep);
-        const { cep, logradouro, complemento, bairro, localidade, uf } = data;
-        result.cep = cep;
-        result.logradouro = logradouro;
-        result.complemento = complemento;
-        result.bairro = bairro;
-        result.localidade = localidade;
-        result.uf = uf;
-      }
+    for (let i = 0; i < payload.endereco.length; i++) {
+      const ceps = payload.endereco;
+      const result = ceps[i];
+      const data = await ViaCep.findViaCep(result.cep);
+      const { cep, logradouro, complemento, bairro, localidade, uf } = data;
+      result.cep = cep;
+      result.logradouro = logradouro;
+      result.complemento = complemento;
+      result.bairro = bairro;
+      result.localidade = localidade;
+      result.uf = uf;
+    }
 
-      const result = await RentalRepository.create(payload, data);
+    const result = await RentalRepository.create(payload, data);
 
-      return result;
+    return result;
   }
 
   async findAll(payload) {

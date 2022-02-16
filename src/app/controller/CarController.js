@@ -1,75 +1,73 @@
 const CarService = require('../service/CarService');
 
-const BadRequest = require('../error/http/BadRequest');
-const NotFound = require('../error/http/NotFound');
-const ConflictError = require('../error/ConflictError');
-
 class CarController {
-  async create(req, res, next) {
+  async create(req, res) {
     const payload = req.body;
     try {
       const result = await CarService.create(payload);
       return res.status(201).json(result);
     } catch (error) {
-      if (error instanceof ConflictError) {
-        next(new BadRequest({ details: error.message }));
-      }
-      next(error);
+      return res.status(error.statusCode).json({
+        description: error.description,
+        name: error.message
+      });
     }
   }
 
-  async findAll(req, res, next) {
+  async findAll(req, res) {
     const payload = req.query;
     try {
       const result = await CarService.findAll(payload);
       return res.status(200).json(result);
     } catch (error) {
-      next(error);
+      return res.status(error.statusCode).json({
+        description: error.description,
+        name: error.message
+      });
     }
   }
 
-  async delete(req, res, next) {
+  async delete(req, res) {
     const { id } = req.params;
     try {
       await CarService.delete(id);
       return res.status(204).end();
     } catch (error) {
-      if (error instanceof NotFound) {
-        next(new NotFound(error.message));
-      } else {
-        next(error);
-      }
+      return res.status(error.statusCode).json({
+        description: error.description,
+        name: error.message
+      });
     }
   }
 
-  async update(req, res, next) {
+  async update(req, res) {
     const { id } = req.params;
     const newCar = req.body;
     try {
       const result = await CarService.update(id, newCar);
       return res.status(200).json(result);
     } catch (error) {
-      if (error instanceof NotFound) {
-        next(new NotFound(error.message));
-      }
-      next(error);
+      return res.status(error.statusCode).json({
+        description: error.description,
+        name: error.message
+      });
     }
   }
 
-  async getById(req, res, next) {
+  async getById(req, res) {
     const { id } = req.params;
     try {
       const result = await CarService.findById(id);
       return res.status(200).json(result);
     } catch (error) {
-      if (error instanceof NotFound) {
-        next(new NotFound(error.message));
-      }
-      next(error);
+      return res.status(error.statusCode).json({
+        description: error.description,
+        name: error.message
+      });
     }
   }
 
-  async updateAccessory(req, res, next) {
+  async updateAccessory(req, res) {
     const { id, acessorioId } = req.params;
     const payload = req.body;
     try {
@@ -77,10 +75,10 @@ class CarController {
 
       return res.status(200).json(result);
     } catch (error) {
-      if (error instanceof NotFound) {
-        next(new NotFound(error.message));
-      }
-      next(error);
+      return res.status(error.statusCode).json({
+        description: error.description,
+        name: error.message
+      });
     }
   }
 }

@@ -28,9 +28,7 @@ class CarService {
   async findById(id) {
     const result = await CarRepository.findById(id);
 
-    if (result === null) {
-      throw new NotFound(`Cannot find vehicle with ID = '${id}'`);
-    }
+    if (result == null) throw new NotFound(id);
 
     return result;
   }
@@ -38,18 +36,15 @@ class CarService {
   async delete(id) {
     const result = await CarRepository.delete(id);
 
-    if (result === null) {
-      throw new NotFound(`Cannot find vehicle with ID = '${id}'`);
-    }
+    if (result == null) throw new NotFound(id);
+
     return result;
   }
 
   async update(id, payload) {
     const result = await CarRepository.update(id, payload);
 
-    if (result === null) {
-      throw new NotFound(`Cannot find vehicle with ID = '${id}'`);
-    }
+    if (result == null) throw new NotFound(id);
 
     return result;
   }
