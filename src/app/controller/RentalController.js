@@ -1,9 +1,8 @@
 const RentalService = require('../service/RentalService');
 
 const BadRequest = require('../error/http/BadRequest');
-const EntityNotFound = require('../error/EntityNotFound');
 const NotFound = require('../error/http/NotFound');
-const UniqueEntryError = require('../error/UniqueEntryError');
+const ConflictError = require('../error/ConflictError');
 
 class RentalController {
   async create(req, res, next) {
@@ -12,7 +11,7 @@ class RentalController {
       const result = await RentalService.create(payload);
       return res.status(201).json(result);
     } catch (error) {
-      if (error instanceof UniqueEntryError) {
+      if (error instanceof ConflictError) {
         next(new BadRequest({ details: error.message }));
       }
       next(error);
@@ -35,7 +34,7 @@ class RentalController {
       await RentalService.delete(id);
       return res.status(204).end();
     } catch (error) {
-      if (error instanceof EntityNotFound) {
+      if (error instanceof NotFound) {
         next(new NotFound(error.message));
       } else {
         next(error);
@@ -50,7 +49,7 @@ class RentalController {
       const result = await RentalService.update(id, newPerson);
       return res.status(200).json(result);
     } catch (error) {
-      if (error instanceof EntityNotFound) {
+      if (error instanceof NotFound) {
         next(new NotFound(error.message));
       }
       next(error);
@@ -63,7 +62,7 @@ class RentalController {
       const result = await RentalService.findById(id);
       return res.status(200).json(result);
     } catch (error) {
-      if (error instanceof EntityNotFound) {
+      if (error instanceof NotFound) {
         next(new NotFound(error.message));
       }
       next(error);

@@ -1,8 +1,8 @@
 const RentalRepository = require('../repository/RentalRepository');
 const ViaCep = require('../api/ViaCep');
 
-const EntityNotFound = require('../error/EntityNotFound');
-const UniqueEntryError = require('../error/UniqueEntryError');
+const NotFound = require('../error/http/NotFound');
+const ConflictError = require('../error/ConflictError');
 
 class RentalService {
   async create(payload, data) {
@@ -25,7 +25,7 @@ class RentalService {
       return result;
     } catch (error) {
       if (error.name === 'MongoServerError' && error.code === 11000) {
-        throw new UniqueEntryError(
+        throw new ConflictError(
           'Locadoras',
           Object.keys(error.keyPattern).map((key) => key)
         );
@@ -45,7 +45,7 @@ class RentalService {
     const result = await RentalRepository.delete(id);
 
     if (result === null) {
-      throw new EntityNotFound(`Cannot find rental with ID = '${id}'`);
+      throw new NotFound(`Cannot find rental with ID = '${id}'`);
     }
 
     return result;
@@ -55,7 +55,7 @@ class RentalService {
     const result = await RentalRepository.update(id, payload);
 
     if (result === null) {
-      throw new EntityNotFound(`Cannot find rental with ID = '${id}'`);
+      throw new NotFound(`Cannot find rental with ID = '${id}'`);
     }
 
     return result;
@@ -65,7 +65,7 @@ class RentalService {
     const result = await RentalRepository.findById(id);
 
     if (result === null) {
-      throw new EntityNotFound(`Cannot find rental with ID = '${id}'`);
+      throw new NotFound(`Cannot find rental with ID = '${id}'`);
     }
 
     return result;

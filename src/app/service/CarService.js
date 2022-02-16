@@ -1,7 +1,7 @@
 const CarRepository = require('../repository/CarRepository');
 
-const EntityNotFound = require('../error/EntityNotFound');
-const UniqueEntryError = require('../error/UniqueEntryError');
+const NotFound = require('../error/http/NotFound');
+const ConflictError = require('../error/ConflictError');
 
 class CarService {
   async create(payload) {
@@ -10,7 +10,7 @@ class CarService {
       return result;
     } catch (error) {
       if (error.name === 'MongoServerError' && error.code === 11000) {
-        throw new UniqueEntryError(
+        throw new ConflictError(
           'Veiculos',
           Object.keys(error.keyPattern).map((key) => key)
         );
@@ -29,7 +29,7 @@ class CarService {
     const result = await CarRepository.findById(id);
 
     if (result === null) {
-      throw new EntityNotFound(`Cannot find vehicle with ID = '${id}'`);
+      throw new NotFound(`Cannot find vehicle with ID = '${id}'`);
     }
 
     return result;
@@ -39,7 +39,7 @@ class CarService {
     const result = await CarRepository.delete(id);
 
     if (result === null) {
-      throw new EntityNotFound(`Cannot find vehicle with ID = '${id}'`);
+      throw new NotFound(`Cannot find vehicle with ID = '${id}'`);
     }
     return result;
   }
@@ -48,7 +48,7 @@ class CarService {
     const result = await CarRepository.update(id, payload);
 
     if (result === null) {
-      throw new EntityNotFound(`Cannot find vehicle with ID = '${id}'`);
+      throw new NotFound(`Cannot find vehicle with ID = '${id}'`);
     }
 
     return result;
