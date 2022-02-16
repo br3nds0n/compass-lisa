@@ -1,8 +1,8 @@
 const schema = require('../schema/personSchema');
 
 class AuthRepository {
-	async findAuth(email){
-		return await schema.findOne({ email });
-	}
+  async findAuth(email) {
+    return await schema.findOne({ email });
+  }
 }
-module.exports = new AuthRepository(); 
+module.exports = new AuthRepository();
