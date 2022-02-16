@@ -1,4 +1,5 @@
 const personSchema = require('../../schema/personSchema');
+const rentalSchema = require('../../schema/rentalSchema');
 const ConflicError = require('../../error/ConflictError');
 
 class ConflicUtils {
@@ -9,7 +10,7 @@ class ConflicUtils {
   }
 
   async ConflicCnpj(cnpj) {
-    const getCnpj = await personSchema.find({ cnpj });
+    const getCnpj = await rentalSchema.find({ cnpj });
 
     if (getCnpj.length > 0) throw new ConflicError(cnpj);
   }

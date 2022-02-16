@@ -2,7 +2,7 @@ const schema = require('../schema/rentalSchema');
 
 class RentalRepository {
   async create(payload, data) {
-    return await schema.create(payload, data);
+    return schema.create(payload, data);
   }
 
   async findAll(payload) {
