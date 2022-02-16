@@ -1,8 +1,8 @@
 const bcrypt = require('bcryptjs');
 
-const AuthRepository = require('../repository/AuthRepository.js');
+const AuthRepository = require('../repository/AuthRepository');
 const generateToken = require('../helper/functions/generateToken');
-const NotFound = require('../error/http/NotFound.js');
+const NotFound = require('../error/http/NotFound');
 
 class AuthService {
   async findAuth(payload) {

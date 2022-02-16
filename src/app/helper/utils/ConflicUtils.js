@@ -14,6 +14,16 @@ class ConflicUtils {
 
     if (getCnpj.length > 0) throw new ConflicError(cnpj);
   }
+
+  async ConflicFilial(filial) {
+    let count = 0;
+    filial.forEach((body) => {
+      if (!body.isFilial) {
+        count++;
+      }
+      if (count > 1) throw new ConflicError('isFilial');
+    });
+  }
 }
 
 module.exports = new ConflicUtils();

@@ -1,6 +1,6 @@
 const HttpError = require('../error/http/httpError');
 
-module.exports = function (err, req, res, next) {
+module.exports = function (err, req, res) {
   if (err instanceof HttpError) {
     res.status(err.statusCode).json({
       message: err.name,

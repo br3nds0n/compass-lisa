@@ -7,6 +7,7 @@ const ConflicUtils = require('../helper/utils/ConflicUtils');
 class RentalService {
   async create(payload, data) {
     await ConflicUtils.ConflicCnpj(payload.cnpj);
+    await ConflicUtils.ConflicFilial(payload.endereco);
 
     try {
       for (let i = 0; i < payload.endereco.length; i++) {
