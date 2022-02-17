@@ -1,4 +1,5 @@
 const RentalService = require('../service/RentalService');
+const paginate = require('../plugins/rentalPaginate');
 
 class RentalController {
   async create(req, res) {
@@ -18,7 +19,7 @@ class RentalController {
     const payload = req.query;
     try {
       const result = await RentalService.findAll(payload);
-      return res.status(200).json(result);
+      return res.status(200).json(paginate(result));
     } catch (error) {
       return res.status(error.statusCode).json({
         description: error.description,
