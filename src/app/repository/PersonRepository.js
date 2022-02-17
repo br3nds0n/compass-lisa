@@ -6,24 +6,15 @@ class PersonRepository {
   }
 
   async findAll(payload) {
-    const myCustomLabels = {
-      totalDocs: 'total',
-      docs: 'Pessoas',
-      page: 'offset',
-      nextPage: false,
-      prevPage: false,
-      totalPages: 'offsets',
-      pagingCounter: false,
-      meta: false,
-      hasPrevPage: false,
-      hasNextPage: false
-    };
-    const options = {
-      page: 1,
-      limit: 100,
-      customLabels: myCustomLabels
-    };
-    return schema.paginate(payload, options, {});
+    const { page = 1, limit = 100, ...query } = payload;
+    return schema.paginate(
+      { ...query },
+      {
+        limit: Number(limit),
+        page: Number(page),
+        skip: (Number(page) - 1) * Number(limit)
+      }
+    );
   }
 
   async findById(id) {

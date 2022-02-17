@@ -1,4 +1,5 @@
 const PersonService = require('../service/PersonService');
+const paginate = require('../plugins/personPaginate');
 
 class PersonController {
   async create(req, res) {
@@ -18,7 +19,7 @@ class PersonController {
     const payload = req.query;
     try {
       const result = await PersonService.findAll(payload);
-      return res.status(200).json(result);
+      return res.status(200).json(paginate(result));
     } catch (error) {
       return res.status(error.statusCode).json({
         description: error.description,
