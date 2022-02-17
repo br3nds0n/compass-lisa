@@ -2,14 +2,23 @@ const PersonRepository = require('../repository/PersonRepository');
 
 const NotFound = require('../error/http/NotFound');
 const ConflicUtils = require('../helper/utils/ConflicUtils');
+const ConflictError = require('../error/ConflictError');
 
 class PersonService {
   async create(payload) {
-    await ConflicUtils.ConflicCpf(payload.cpf);
-    await ConflicUtils.ConflicEmail(payload.email);
+    try {
+      await ConflicUtils.ConflicCpf(payload.cpf);
+      await ConflicUtils.ConflicEmail(payload.email);
 
-    const result = await PersonRepository.create(payload);
-    return result;
+      const result = await PersonRepository.create(payload);
+      return result;
+    } catch (error) {
+      if (error.name === 'MongoServerError' && error.code === 11000) {
+        throw new ConflictError(Object.keys(error.keyPattern).map((key) => key));
+      } else {
+        throw error;
+      }
+    }
   }
 
   async findAll(payload) {

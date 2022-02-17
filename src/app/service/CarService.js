@@ -10,10 +10,7 @@ class CarService {
       return result;
     } catch (error) {
       if (error.name === 'MongoServerError' && error.code === 11000) {
-        throw new ConflictError(
-          'Veiculos',
-          Object.keys(error.keyPattern).map((key) => key)
-        );
+        throw new ConflictError(Object.keys(error.keyPattern).map((key) => key));
       } else {
         throw error;
       }

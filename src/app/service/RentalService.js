@@ -26,8 +26,11 @@ class RentalService {
       const result = await RentalRepository.create(payload, data);
       return result;
     } catch (error) {
-      if (error.name === 'MongoServerError' && error.code === 11000)
+      if (error.name === 'MongoServerError' && error.code === 11000) {
         throw new ConflictError(Object.keys(error.keyPattern).map((key) => key));
+      } else {
+        throw error;
+      }
     }
   }
 
