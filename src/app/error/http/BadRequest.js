@@ -6,7 +6,6 @@ class BadRequest extends HttpError {
 
     this.name = 'Bad Request';
     this.body = { details };
-    this.message = `${details} was not found`;
   }
 }
 
