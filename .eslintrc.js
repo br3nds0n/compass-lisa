@@ -26,6 +26,7 @@ module.exports = {
     'consistent-return': 'off',
     radix: 'off',
     'import/order': 'off',
-    'func-names': 'off'
+    'func-names': 'off',
+    eqeqeq: 'off'
   }
 };

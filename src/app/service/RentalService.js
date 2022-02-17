@@ -3,10 +3,17 @@ const ViaCep = require('../api/ViaCep');
 
 const ConflictError = require('../error/ConflictError');
 const NotFound = require('../error/http/NotFound');
+const BadRequest = require('../error/http/BadRequest');
+
 const ConflicUtils = require('../helper/utils/ConflicUtils');
+const validCnpj = require('../helper/functions/isCnpj');
 
 class RentalService {
   async create(payload, data) {
+    if (validCnpj(payload.cnpj) === false) {
+      throw new BadRequest(`cnpj '${payload.cnpj}' is invalid`);
+    }
+
     await ConflicUtils.ConflicCnpj(payload.cnpj);
     await ConflicUtils.ConflicFilial(payload.endereco);
 

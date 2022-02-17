@@ -1,6 +1,5 @@
 const Joi = require('joi').extend(require('@joi/date'));
 
-const isCpf = require('../../helper/functions/isCpf');
 const isYear18 = require('../../helper/functions/isYear18');
 const ENUM = require('../../helper/utils/enum');
 
@@ -10,16 +9,7 @@ module.exports = async (req, res, next) => {
   try {
     const schema = Joi.object({
       nome: Joi.string().trim().required(),
-      cpf: Joi.string()
-        .trim()
-        .min(11)
-        .max(11)
-        .custom((value, help) => {
-          if (!isCpf(value)) {
-            return help.message(`cpf '${value}' is invalid`);
-          }
-          return true;
-        }),
+      cpf: Joi.string().trim().min(11).max(11).required(),
       data_nascimento: Joi.date()
         .format('DD/MM/YYYY')
         .raw()

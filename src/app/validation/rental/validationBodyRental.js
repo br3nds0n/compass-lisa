@@ -1,23 +1,12 @@
 const Joi = require('joi');
 
-const isCnpj = require('../../helper/functions/isCnpj');
-
 const BadRequest = require('../../error/http/BadRequest');
 
 module.exports = async (req, res, next) => {
   try {
     const schema = Joi.object({
       nome: Joi.string().trim().required(),
-      cnpj: Joi.string()
-        .trim()
-        .min(14)
-        .max(14)
-        .custom((value, help) => {
-          if (isCnpj(value)) {
-            return help.message('Invalid cnpj: enter a valid cnpj');
-          }
-          return true;
-        }),
+      cnpj: Joi.string().trim().min(14).max(14).required(),
       atividades: Joi.string().trim().required(),
       endereco: Joi.array()
         .min(1)

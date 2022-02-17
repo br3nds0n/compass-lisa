@@ -1,15 +1,22 @@
 const PersonRepository = require('../repository/PersonRepository');
 
-const NotFound = require('../error/http/NotFound');
-const ConflicUtils = require('../helper/utils/ConflicUtils');
 const ConflictError = require('../error/ConflictError');
+const NotFound = require('../error/http/NotFound');
+const BadRequest = require('../error/http/BadRequest');
+
+const ConflicUtils = require('../helper/utils/ConflicUtils');
+const validCpf = require('../helper/functions/isCpf');
 
 class PersonService {
   async create(payload) {
-    try {
-      await ConflicUtils.ConflicCpf(payload.cpf);
-      await ConflicUtils.ConflicEmail(payload.email);
+    if (validCpf(payload.cpf) === false) {
+      throw new BadRequest(`cpf '${payload.cpf}' is invalid`);
+    }
 
+    await ConflicUtils.ConflicCpf(payload.cpf);
+    await ConflicUtils.ConflicEmail(payload.email);
+
+    try {
       const result = await PersonRepository.create(payload);
       return result;
     } catch (error) {

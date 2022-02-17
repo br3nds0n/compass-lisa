@@ -1,4 +1,4 @@
-function isValid(cpf) {
+function validCpf(cpf) {
   if (typeof cpf !== 'string') return false;
   cpf = cpf.replace(/[\s.-]*/gim, '');
   if (
@@ -31,4 +31,4 @@ function isValid(cpf) {
   if (rest !== parseInt(cpf.substring(10, 11))) return false;
   return true;
 }
-module.exports = isValid;
+module.exports = validCpf;
