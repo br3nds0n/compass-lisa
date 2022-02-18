@@ -50,6 +50,12 @@ describe('Test-Feature-Rental', () => {
     expect(res.statusCode).toBe(200);
   });
 
+  it('GET /api/v1/rental - find All', async () => {
+    const res = await supertest(App).get('/api/v1/rental?cnpj=123');
+
+    expect(res.statusCode).toBe(400);
+  });
+
   it('GET /api/v1/rental - INVALID', async () => {
     const res = await supertest(App).get('/api/v1/renta');
 

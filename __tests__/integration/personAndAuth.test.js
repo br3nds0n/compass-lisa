@@ -41,6 +41,12 @@ describe('Test-Feature-Person', () => {
     expect(res.statusCode).toBe(200);
   });
 
+  it('GET /api/v1/people - find All', async () => {
+    const res = await supertest(App).get('/api/v1/people?data-nascimento=1');
+
+    expect(res.statusCode).toBe(400);
+  });
+
   it('GET /api/v1/people - INVALID', async () => {
     const res = await supertest(App).get('/api/v1/peop');
 
