@@ -204,7 +204,7 @@ As seguintes ferramentas/tecnologias foram usadas na construção e testagem do 
 | <a href="https://www.mongodb.com/try/download/community" target="_blank"><img align="center" alt="mongo" height="30" width="40" src="https://github.com/devicons/devicon/blob/master/icons/mongodb/mongodb-original.svg"></a>            | MongoDB                      |  `5.0.5`       |
 | <a href="https://www.postman.com/downloads/" target="_blank"><img align="center" alt="postman" height="30" width="30" src="https://user-images.githubusercontent.com/82064724/147416090-89b4e7a3-2b78-417a-a154-f47940d23e38.png">            | Postman                    |  `9.6.2`       |
 | <a href="https://code.visualstudio.com/download" target="_blank"><img align="center" alt="VsCode" height="25" width="35" src="https://github.com/devicons/devicon/blob/master/icons/vscode/vscode-original.svg"></a> | VsCode | `1.63.2` |
-
+| <a href="https://dashboard.heroku.com/" target="_blank"><img align="center" alt="heroku" height="25" width="35" src="https://github.com/devicons/devicon/blob/master/icons/heroku/heroku-plain.svg"></a>|Heroku|`20.0.0`|
  
  <br>
 
