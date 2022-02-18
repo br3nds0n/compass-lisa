@@ -1,6 +1,5 @@
 function validCpf(cpf) {
   if (typeof cpf !== 'string') return false;
-  cpf = cpf.replace(/[\s.-]*/gim, '');
   if (
     !cpf ||
     cpf.length !== 11 ||

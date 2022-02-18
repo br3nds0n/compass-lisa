@@ -94,6 +94,32 @@ describe('Test-Feature-Person', () => {
     expect(res.statusCode).toBe(400);
   });
 
+  it('POST /api/v1/people INVALID CONFLCT CPF', async () => {
+    const res = await supertest(App).post('/api/v1/people').send({
+      nome: 'bredson',
+      cpf: '57042360060',
+      data_nascimento: '23/04/2003',
+      email: 'brendson@exemple.com',
+      senha: '123456',
+      habilitado: 'sim'
+    });
+
+    expect(res.statusCode).toBe(409);
+  });
+
+  it('POST /api/v1/people INVALID CONFLCT EMAIL', async () => {
+    const res = await supertest(App).post('/api/v1/people').send({
+      nome: 'bredson',
+      cpf: '70241981093',
+      data_nascimento: '23/04/2003',
+      email: 'brendson@exemple.com',
+      senha: '123456',
+      habilitado: 'sim'
+    });
+
+    expect(res.statusCode).toBe(409);
+  });
+
   /* 
     PUT - PEOPLE
   */
@@ -164,12 +190,20 @@ describe('Test-Feature-Person', () => {
       expect(res.statusCode).toBe(200);
     });
 
-    it('POST /api/v1/authenticate', async () => {
+    it('POST /api/v1/authenticate - INVALID BAD-REQUEST', async () => {
       const res = await supertest(App).post('/api/v1/authenticate').send({
         email: '',
         senha: '123456'
       });
       expect(res.statusCode).toBe(400);
+    });
+
+    it('POST /api/v1/authenticate - INVALID NOT-FOUND', async () => {
+      const res = await supertest(App).post('/api/v1/authenticate').send({
+        email: 'invalidemail@gamail.com',
+        senha: '123456'
+      });
+      expect(res.statusCode).toBe(404);
     });
   });
 });
