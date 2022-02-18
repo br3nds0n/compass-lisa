@@ -163,7 +163,7 @@ $ npm run test
 # Será rodado os testes de feature no terminal
 ```
 > Resultado esperado:
-<img src="https://user-images.githubusercontent.com/82064724/152529344-dff51be3-ad25-4814-8ee8-8679710ac476.png">
+<img src="https://user-images.githubusercontent.com/82064724/154745375-94ce1550-43a3-4b11-abba-46df9ff5c919.png">
 
 ### 📄 Documentação
 > Para ter acesso a documentação, e também poder testar a `API` siga os passos:
@@ -187,7 +187,11 @@ ___
 ## 🌐 Deploy 
 > Na fase de Deploy foi utilizada a ferramenta [Heroku](https://dashboard.heroku.com/), para fazer a hospedagem da nossa `API`.
 
-para ter acesso a Documentação da compass-lisa na Web. <br> Acesse: <a>https://compasso-lisa.herokuapp.com/api/v1/api-docs</a> 
+para ter acesso a Documentação da compass-lisa na Web. <br> Acesse: <a>https://compasso-lisa.herokuapp.com/api/v1/api-docs/</a>.
+
+<br>
+
+[<Back](#indice)
 
 ---
 ## 🛠 Tecnologias
@@ -263,6 +267,9 @@ As seguintes ferramentas/tecnologias foram usadas na construção e testagem do 
 
 <br>
 
+[<Back](#indice)
+
+
 ## ✍🏼 Autor
 
 Esse é meu último projeto do programa de bolsas da compasso, fico muito feliz em perceber minha evolução ao decorrer do programa. Lembro de quando recebi a ligação me convidando para fazer parte do programa, só Deus e a recrutadora sabe o quanto eu comemorei(hehehe). E agora está no final do programa e só tenho a agradecer a todos que estavam a frente dessa turma. 
@@ -290,12 +297,18 @@ Esse é o projeto final mas não é o fim. Apenas o começo, vamos nos ver na [c
 
 <div align=left>
 
+<br>
+
+[<Back](#indice)
+ 
 ---
  
 ## 📝 LICENÇA
 
 Esse repositório está licenciado pela **MIT LICENSE**. Para mais informações detalhadas, leia o arquivo [LICENSE](./LICENSE) contido nesse repositório.
 
+ <br>               
+  
  [<Back](#compassolisa-dealership-)
  
  <br>
@@ -305,3 +318,8 @@ Esse repositório está licenciado pela **MIT LICENSE**. Para mais informações
  #### Os [instrutores](#-Agradecimentos) depois desse projeto: 
  
   <img width="900" height="300" src="https://pm1.narvii.com/6359/1ec89eddc009439df6ac56cd7890f1e08e680fb6_hq.jpg">
+ 
+ <br>               
+ <br> 
+ 
+ [<Back](#compassolisa-dealership-)
