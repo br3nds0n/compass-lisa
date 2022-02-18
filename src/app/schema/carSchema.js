@@ -4,36 +4,36 @@ const mongoosePaginate = require('mongoose-paginate-v2');
 const { Schema } = mongoose;
 
 const schema = new Schema({
-	modelo: {
-		type: String,
-		required: true
-	},
-	cor: {
-		type: String,
-		required: true
-	},
-	ano: {
-		type: String,
-		required: true
-	},
-	acessorios: [
-		{
-			descricao: { type: String, required: true }
-		}
-	],
-	quantidadePassageiros: {
-		type: Number,
-		minLength: 1,
-		required: true
-	}
+  modelo: {
+    type: String,
+    required: true
+  },
+  cor: {
+    type: String,
+    required: true
+  },
+  ano: {
+    type: Number,
+    required: true
+  },
+  acessorios: [
+    {
+      descricao: { type: String, required: true }
+    }
+  ],
+  quantidadePassageiros: {
+    type: Number,
+    minLength: 1,
+    required: true
+  }
 });
 
 schema.method('toJSON', function () {
-	const { ...car } = this.toObject();
+  const { ...car } = this.toObject();
 
-	 car.__v = undefined;
+  car.__v = undefined;
 
-	return car;
+  return car;
 });
 
 schema.plugin(mongoosePaginate);

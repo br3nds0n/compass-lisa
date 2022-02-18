@@ -1,12 +1,13 @@
 const HttpError = require('./httpError');
 
 class NotFound extends HttpError {
-	constructor (message) {
-		super(404, message);
+  constructor(payload) {
+    super();
 
-		this.name = 'Not Found';
-		this.body = { details: [message] };
-	}
+    this.statusCode = 404;
+    this.description = 'Not Found';
+    this.message = `${payload} was not found`;
+  }
 }
 
 module.exports = NotFound;
