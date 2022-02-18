@@ -6,11 +6,18 @@ const BadRequest = require('../error/http/BadRequest');
 
 const ConflicUtils = require('../helper/utils/ConflicUtils');
 const validCpf = require('../helper/functions/isCpf');
+const isYear18 = require('../helper/functions/isYear18');
 
 class PersonService {
   async create(payload) {
     if (validCpf(payload.cpf) === false) {
       throw new BadRequest(`cpf '${payload.cpf}' is invalid`);
+    }
+
+    const getDate = payload.data_nascimento;
+    const date = getDate.substr(6, 4);
+    if (isYear18(new Date(date)) === false) {
+      throw new BadRequest('must be over 18 years old');
     }
 
     await ConflicUtils.ConflicCpf(payload.cpf);
@@ -52,8 +59,17 @@ class PersonService {
 
   async update(id, payload) {
     const result = await PersonRepository.update(id, payload);
-
     if (result == null) throw new NotFound(id);
+
+    if (validCpf(payload.cpf) === false) {
+      throw new BadRequest(`cpf '${payload.cpf}' is invalid`);
+    }
+
+    const getDate = payload.data_nascimento;
+    const date = getDate.substr(6, 4);
+    if (isYear18(new Date(date)) === false) {
+      throw new BadRequest('must be over 18 years old');
+    }
 
     return result;
   }
