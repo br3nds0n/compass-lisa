@@ -27,6 +27,7 @@ module.exports = {
     radix: 'off',
     'import/order': 'off',
     'func-names': 'off',
+    'import/no-unresolved': 'off',
     eqeqeq: 'off'
   }
 };
