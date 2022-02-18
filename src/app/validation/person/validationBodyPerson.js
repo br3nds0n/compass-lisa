@@ -1,8 +1,6 @@
 const Joi = require('joi').extend(require('@joi/date'));
 
-const isYear18 = require('../../helper/functions/isYear18');
 const ENUM = require('../../helper/utils/enum');
-
 const BadRequest = require('../../error/http/BadRequest');
 
 module.exports = async (req, res, next) => {
@@ -10,18 +8,7 @@ module.exports = async (req, res, next) => {
     const schema = Joi.object({
       nome: Joi.string().trim().required(),
       cpf: Joi.string().trim().min(11).max(11).required(),
-      data_nascimento: Joi.date()
-        .format('DD/MM/YYYY')
-        .raw()
-        .max('now')
-        .greater('1-1-1900')
-        .required()
-        .custom((value, help) => {
-          if (isYear18(new Date(value)) === false) {
-            return help.message('You need tobe ove 18 years old');
-          }
-        })
-        .required(),
+      data_nascimento: Joi.date().format('DD/MM/YYYY').raw().max('now').greater('1-1-1900').required(),
       email: Joi.string()
         .trim()
         .email({

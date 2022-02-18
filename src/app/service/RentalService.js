@@ -58,6 +58,10 @@ class RentalService {
   async update(id, payload) {
     const result = await RentalRepository.update(id, payload);
 
+    if (validCnpj(payload.cnpj) === false) {
+      throw new BadRequest(`cnpj '${payload.cnpj}' is invalid`);
+    }
+
     if (result == null) throw new NotFound(id);
 
     return result;
