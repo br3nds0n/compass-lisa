@@ -163,7 +163,7 @@ $ npm run test
 # Será rodado os testes de feature no terminal
 ```
 > Resultado esperado:
-<img src="https://user-images.githubusercontent.com/82064724/154745375-94ce1550-43a3-4b11-abba-46df9ff5c919.png">
+<img src="https://user-images.githubusercontent.com/82064724/154783250-1d2e755d-a7df-49ca-a8b9-eeb541dce316.png">
 
 ### 📄 Documentação
 > Para ter acesso a documentação, e também poder testar a `API` siga os passos:
