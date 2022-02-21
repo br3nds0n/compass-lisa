@@ -7,7 +7,7 @@
     "start": "node ./src/server.js",
     "dev": "nodemon ./src/server.js --ignore __tests__",
     "lint": "eslint . --fix",
-    "test": "jest --coverage --coverageReporters"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",

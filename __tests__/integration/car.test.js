@@ -288,4 +288,39 @@ describe('Test-Feature-Rental', () => {
 
     expect(res.statusCode).toBe(401);
   });
+
+  /*
+    PATCH CAR
+  */
+
+  it('PATCH /api/v1/car/', async () => {
+    const res = await supertest(App)
+      .patch(`/api/v1/car/${car.c1._id}/acessorios/${car.c1.acessorios[0]._id}`)
+      .set('authorization', token)
+      .send({ descricao: 'Ar-descondicionado' });
+    expect(res.statusCode).toBe(200);
+  });
+
+  it('PATCH /api/v1/car/ UNAUTHORIZED', async () => {
+    const res = await supertest(App)
+      .patch(`/api/v1/car/${car.c1._id}/acessorios/${car.c1.acessorios[0]._id}`)
+      .send({ descricao: 'Ar-descondicionado' });
+    expect(res.statusCode).toBe(401);
+  });
+
+  it('PATCH /api/v1/car/ - Bad Request', async () => {
+    const res = await supertest(App)
+      .patch(`/api/v1/car/${car.c1._id}/acessorios/${car.c1.acessorios[0]._id}`)
+      .set('authorization', token)
+      .send({ descricao: '' });
+    expect(res.statusCode).toBe(400);
+  });
+
+  it('PATCH /api/v1/car/ - Not Found', async () => {
+    const res = await supertest(App)
+      .patch(`/api/v1/car//acessorios/`)
+      .set('authorization', token)
+      .send({ descricao: 'Ar-descondicionado' });
+    expect(res.statusCode).toBe(404);
+  });
 });
