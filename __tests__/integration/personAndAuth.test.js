@@ -138,6 +138,19 @@ describe('Test-Feature-Person', () => {
     expect(res.statusCode).toBe(409);
   });
 
+  it('POST /api/v1/people INVALID CONFLCT EMAIL', async () => {
+    const res = await supertest(App).post('/api/v1/people').send({
+      nome: 'bredson',
+      cpf: '1234567897',
+      data_nascimento: '23/04/2003',
+      email: 'brendson@exemple.com',
+      senha: '123456',
+      habilitado: 'sim'
+    });
+
+    expect(res.statusCode).toBe(400);
+  });
+
   /* 
     PUT - PEOPLE
   */
