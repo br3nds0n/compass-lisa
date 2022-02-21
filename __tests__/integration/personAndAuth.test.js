@@ -42,7 +42,19 @@ describe('Test-Feature-Person', () => {
   });
 
   it('GET /api/v1/people - find All', async () => {
-    const res = await supertest(App).get('/api/v1/people?data-nascimento=1');
+    const res = await supertest(App).get('/api/v1/people?data_nascimento=1');
+
+    expect(res.statusCode).toBe(400);
+  });
+
+  it('GET /api/v1/people - find All', async () => {
+    const res = await supertest(App).get('/api/v1/people?cpf=1231');
+
+    expect(res.statusCode).toBe(400);
+  });
+
+  it('GET /api/v1/people - find All', async () => {
+    const res = await supertest(App).get('/api/v1/people?email=1231');
 
     expect(res.statusCode).toBe(400);
   });
@@ -210,6 +222,22 @@ describe('Test-Feature-Person', () => {
         senha: '123456'
       });
       expect(res.statusCode).toBe(404);
+    });
+
+    it('POST /api/v1/authenticate - INVALID', async () => {
+      const res = await supertest(App).post('/api/v1/authenticate').send({
+        email: 'invalidemail@.com',
+        senha: '123456'
+      });
+      expect(res.statusCode).toBe(400);
+    });
+
+    it('POST /api/v1/authenticate - INVALID', async () => {
+      const res = await supertest(App).post('/api/v1/authenticate').send({
+        email: 'invalidemail@gamail.com',
+        senha: '1234'
+      });
+      expect(res.statusCode).toBe(400);
     });
   });
 });
