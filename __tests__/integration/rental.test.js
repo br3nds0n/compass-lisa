@@ -163,6 +163,32 @@ describe('Test-Feature-Rental', () => {
     expect(res.statusCode).toBe(409);
   });
 
+  it('POST /api/v1/rental - INVALID CONFLICT CEP', async () => {
+    const res = await supertest(App)
+      .post('/api/v1/rental')
+      .send({
+        nome: 'Fiat',
+        cnpj: '85021923000182',
+        atividades: 'Venda de Automóveis',
+        endereco: [
+          {
+            cep: '40717336',
+            number: '123',
+            complemento: '1 andar',
+            isFilial: false
+          },
+          {
+            cep: '79091000',
+            number: '123',
+            complemento: '1 andar',
+            isFilial: false
+          }
+        ]
+      });
+
+    expect(res.statusCode).toBe(409);
+  });
+
   /* 
     PUT - RENTAL
   */
